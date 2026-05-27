@@ -6,551 +6,204 @@
 <title>SME-Agent: 3-Month Generative Research Plan</title>
 <script>
 MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscapes: true,
-    tags: 'ams'
-  },
-  options: {
-    ignoreHtmlClass: 'no-math',
-    processHtmlClass: 'math'
-  }
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], processEscapes: true, tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math', processHtmlClass: 'math' }
 };
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
   :root {
-    --bg: #0d1117;
-    --surface: #161b22;
-    --border: #30363d;
-    --text: #c9d1d9;
-    --text-muted: #8b949e;
-    --accent: #58a6ff;
-    --accent-alt: #3fb950;
-    --warn: #d29922;
-    --danger: #f85149;
-    --code-bg: #1c2128;
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #c9d1d9; --text-muted: #8b949e; --accent: #58a6ff;
+    --accent-alt: #3fb950; --warn: #d29922; --code-bg: #1c2128;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    font-size: 16px;
-  }
-  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; font-size: 13px; }
+  .container { max-width: 1050px; margin: 0 auto; padding: 1rem 1.5rem; }
 
-  header {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  header h1 { font-size: 2rem; color: var(--accent); margin-bottom: 0.25rem; }
-  header .subtitle { color: var(--text-muted); font-size: 1.05rem; }
-  header .meta { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+  header h1 { font-size: 1.35rem; color: var(--accent); }
+  header .meta { color: var(--text-muted); font-size: 0.78rem; }
 
-  nav { margin-bottom: 2rem; }
-  nav details { cursor: pointer; }
-  nav summary { color: var(--accent); font-weight: 600; margin-bottom: 0.5rem; }
-  nav ul { list-style: none; padding-left: 1rem; columns: 2; }
-  nav li { margin-bottom: 0.25rem; }
-  nav a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
-  nav a:hover { color: var(--accent); }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem; }
+  .card h2 { font-size: 0.95rem; color: var(--accent-alt); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; margin-bottom: 0.5rem; }
+  .card h3 { font-size: 0.8rem; color: var(--accent); margin: 0.5rem 0 0.25rem; }
+  .card ul { list-style: none; padding: 0; }
+  .card li { margin-bottom: 0.15rem; padding-left: 0.75rem; position: relative; font-size: 0.78rem; }
+  .card li::before { content: "—"; position: absolute; left: 0; color: var(--text-muted); }
 
-  h2 {
-    font-size: 1.4rem;
-    color: var(--accent-alt);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.4rem;
-    margin: 2.5rem 0 1rem;
-  }
-  h3 { font-size: 1.15rem; color: var(--accent); margin: 1.5rem 0 0.75rem; }
-  h4 { font-size: 1rem; color: var(--text); margin: 1.2rem 0 0.5rem; }
+  .milestone { font-size: 0.72rem; font-weight: 600; background: #1b3a1b; color: var(--accent-alt); padding: 0.2em 0.5em; border-radius: 3px; margin-top: 0.4rem; display: inline-block; }
 
-  p { margin-bottom: 0.75rem; }
-  ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
-  li { margin-bottom: 0.3rem; }
-  li ul { margin: 0.25rem 0 0.5rem 1.5rem; }
+  .bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-  strong { color: #f0f6fc; }
-  em { color: var(--warn); }
-
-  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
-  th, td { padding: 0.5rem 0.75rem; text-align: left; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.75rem; margin-top: 0.4rem; }
+  th, td { padding: 0.25rem 0.5rem; text-align: left; border: 1px solid var(--border); }
   th { background: var(--surface); color: var(--accent); font-weight: 600; }
-  tr:nth-child(even) { background: var(--surface); }
 
-  code {
-    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-    font-size: 0.88em;
-    background: var(--code-bg);
-    padding: 0.15em 0.4em;
-    border-radius: 3px;
-    color: #d2a8ff;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1rem;
-    overflow-x: auto;
-    margin: 1rem 0;
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-  pre code { background: none; padding: 0; color: var(--text); }
+  code { font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace; font-size: 0.85em; background: var(--code-bg); padding: 0.1em 0.3em; border-radius: 2px; color: #d2a8ff; }
 
-  .milestone {
-    background: var(--surface);
-    border-left: 3px solid var(--accent-alt);
-    padding: 0.6rem 1rem;
-    margin: 0.75rem 0;
-    font-weight: 600;
-    font-size: 0.9rem;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .risk-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    margin: 1rem 0;
-  }
-  .risk-grid > div { padding: 0.5rem 0.75rem; font-size: 0.85rem; border-top: 1px solid var(--border); }
-  .risk-header { background: var(--surface); font-weight: 700; color: var(--accent); border-top: none; }
-  .risk-sev { color: var(--danger); font-weight: 600; }
-
-  .badge {
-    display: inline-block;
-    padding: 0.1em 0.55em;
-    border-radius: 10px;
-    font-size: 0.8em;
-    font-weight: 600;
-  }
+  .badge { display: inline-block; padding: 0.1em 0.4em; border-radius: 8px; font-size: 0.75em; font-weight: 600; }
   .badge-ok { background: #1b3a1b; color: var(--accent-alt); }
   .badge-warn { background: #3a2e0e; color: var(--warn); }
   .badge-tbd { background: #1a2233; color: var(--accent); }
 
-  .timeline {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
-    margin: 1.5rem 0;
-  }
-  .timeline-month {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem;
-  }
-  .timeline-month h3 { margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  .giant-arrow { text-align: center; color: var(--warn); font-size: 1rem; font-weight: 700; padding: 0.3rem 0 0.8rem; }
 
-  footer {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    text-align: center;
-  }
+  footer { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; text-align: center; }
 
-  @media (max-width: 700px) {
-    .timeline { grid-template-columns: 1fr; }
-    nav ul { columns: 1; }
-    .risk-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 800px) { .three-col, .bottom-row { grid-template-columns: 1fr; } }
+  @media print { body { font-size: 10px; } .container { max-width: 100%; padding: 0.5rem; } }
 </style>
 </head>
 <body>
 <div class="container">
 
 <header>
-  <h1>SME-Agent</h1>
-  <div class="subtitle">3-Month Generative Research Plan</div>
-  <div class="meta">May 26 — August 26, 2026 &nbsp;|&nbsp; Focus: Generative Design Agent &nbsp;|&nbsp; v1.0</div>
+  <h1>SME-Agent &mdash; 3-Month Generative Research Plan</h1>
+  <div class="meta">May 26 &mdash; Aug 26, 2026 &nbsp;|&nbsp; v2 &nbsp;|&nbsp; Rendered with <span class="math">$\mathrm{\LaTeX}$</span></div>
 </header>
 
-<nav>
-  <details open>
-    <summary>Table of Contents</summary>
+<div class="three-col">
+
+  <div class="card">
+    <h2>Month 1: Data &amp; Baselines <span class="badge badge-ok">May 26 — Jun 26</span></h2>
+    <h3>Weeks 1–2: Dataset</h3>
     <ul>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#month-1">Month 1: Data &amp; Baselines</a></li>
-      <li><a href="#month-2">Month 2: Conditional Graph Generator</a></li>
-      <li><a href="#month-3">Month 3: Agentic Loop &amp; Benchmarking</a></li>
-      <li><a href="#deliverables">Deliverables</a></li>
-      <li><a href="#risks">Dependencies &amp; Risks</a></li>
-      <li><a href="#integration">Integration Points</a></li>
-      <li><a href="#architecture">System Architecture</a></li>
-      <li><a href="#manuscript">Manuscript Figure 3</a></li>
+      <li>Audit SMEMol: deduplicate, validate SMILES, standardize canonical SMILES + SELFIES</li>
+      <li>Verify anchor-group labels; assign scaffold IDs and data tiers (A–F)</li>
+      <li>Export <code>data/processed/smemol_standardized.csv</code>; document gaps</li>
     </ul>
-  </details>
-</nav>
+    <span class="milestone">M1: Clean dataset commit</span>
 
-<!-- ========== OVERVIEW ========== -->
-<h2 id="overview">1. Overview</h2>
-
-<p>
-This plan focuses on the <strong>generative design agent</strong>: building a conditional
-molecular generator, strong baselines, and an evaluation framework that feeds
-into the broader agentic discovery system.
-</p>
-
-<h3>Core Scientific Thesis</h3>
-
-<p>
-Single-molecule electronics is a
-<strong>sparse-data, mechanism-rich, experimentally expensive quantum-transport
-discovery problem</strong>. The system should be judged by whether it can:
-</p>
-
-<ol>
-  <li>Propose explicit quantum-interference hypotheses</li>
-  <li>Design molecules that test those hypotheses</li>
-  <li>Distinguish new mechanisms from known expert rules</li>
-  <li>Select positive, negative, and control molecules prospectively</li>
-  <li>Explain successes and failures</li>
-  <li>Build an auditable reasoning trail</li>
-</ol>
-
-<div class="timeline">
-  <div class="timeline-month">
-    <h3>Month 1</h3>
-    <div style="color: var(--text-muted); font-size:0.85rem;">May 26 — Jun 26</div>
-    <div style="margin-top:0.75rem;"><strong>Data &amp; Baselines</strong></div>
-    <ul style="font-size:0.85rem;">
-      <li>Dataset audit &amp; standardization</li>
-      <li>5 baselines running</li>
-      <li>Evaluation harness</li>
+    <h3>Week 3: Legacy baselines</h3>
+    <ul>
+      <li>Re-run LSTM generator + SMEPre predictor</li>
+      <li>SELFIES Transformer baseline</li>
+      <li>Random SME-like enumeration (fragment pool + SMILES filter)</li>
     </ul>
+    <span class="milestone">M2: 3 baselines running</span>
+
+    <h3>Week 4: Evaluation + expert rules</h3>
+    <ul>
+      <li>Unified CLI evaluation harness (10+ metrics)</li>
+      <li>Expert-rule baseline: QI-motif catalog + anchor enumeration</li>
+      <li>Property-conditioning schema defined</li>
+    </ul>
+    <span class="milestone">M3: 5 baselines benchmarked</span>
   </div>
-  <div class="timeline-month">
-    <h3>Month 2</h3>
-    <div style="color: var(--text-muted); font-size:0.85rem;">Jun 26 — Jul 26</div>
-    <div style="margin-top:0.75rem;"><strong>Graph Generator</strong></div>
-    <ul style="font-size:0.85rem;">
-      <li>Graph diffusion setup</li>
-      <li>Multi-property conditioning</li>
-      <li>REINVENT4 baseline</li>
+
+  <div class="card">
+    <h2>Month 2: Graph Generator <span class="badge badge-warn">Jun 26 — Jul 26</span></h2>
+    <h3>Weeks 5–6: Diffusion setup</h3>
+    <ul>
+      <li>Choose DiGress or MiDi; SME-specific featurization (S, N, O, Au-binding atoms, anchor tokens)</li>
+      <li>Scaffold-split train/val/test; train unconditional model</li>
+      <li>Add classifier-free guidance + property regression head</li>
     </ul>
+    <span class="milestone">M4: Graph diffusion generating valid SME molecules</span>
+
+    <h3>Weeks 7–8: Property control</h3>
+    <ul>
+      <li>Multi-property conditioning: $\mathbf{c} = [\text{DQI}, S, \Delta G_{\text{reg}}, \eta_{\text{reg}}, \text{SAscore}, \text{scaffold}]$</li>
+      <li>Controllability metric: $\mathbb{E}[|c_p - \hat{y}_p(G_{\text{gen}})|]$</li>
+      <li>Scaffold-conditioned generation; anchor-validity post-filter</li>
+    </ul>
+    <span class="milestone">M5: Conditional generator with quantitative control</span>
+
+    <h3>Week 9: REINVENT4 baseline</h3>
+    <ul>
+      <li>Transformer agent + $R(x) = w_1\text{SMEPre} + w_2\text{SAscore} + w_3\mathbf{1}[\text{anchor}]$</li>
+      <li>Head-to-head vs graph diffusion under matched compute</li>
+    </ul>
+    <span class="milestone">M6: 6th baseline; first comparison</span>
   </div>
-  <div class="timeline-month">
-    <h3>Month 3</h3>
-    <div style="color: var(--text-muted); font-size:0.85rem;">Jul 26 — Aug 26</div>
-    <div style="margin-top:0.75rem;"><strong>Loop &amp; Benchmark</strong></div>
-    <ul style="font-size:0.85rem;">
-      <li>Hypothesis-conditioned generation</li>
-      <li>Active-learning round 1</li>
-      <li>Figure 3 draft</li>
+
+  <div class="card">
+    <h2>Month 3: Agentic Loop <span class="badge badge-warn">Jul 26 — Aug 26</span></h2>
+    <h3>Weeks 10–11: Hypothesis-conditioned</h3>
+    <ul>
+      <li>$\mathcal{H} \xrightarrow{f_{\text{map}}} \{\text{scaffold}, \text{substituents}, \text{anchors}, \text{targets}\} \xrightarrow{g_{\text{gen}}} \text{Molecules}$</li>
+      <li>Generate for 3–5 QI hypotheses; critic-agent review</li>
     </ul>
+    <span class="milestone">M7: Hypothesis → generation → critique pipeline</span>
+
+    <h3>Week 12: Active-learning round 1</h3>
+    <ul>
+      <li>Generate 50k → filter → SMEPre score → select 50 (40% exploit / 40% explore / 20% controls)</li>
+      <li>Matched-budget benchmark: 6 generators</li>
+    </ul>
+    <span class="milestone">M8: Benchmark table; DFT batch ready</span>
+
+    <h3>Week 13: Figure 3</h3>
+    <ul>
+      <li>DFT hit rate, scaffold novelty, property controllability, hypothesis confirmation</li>
+      <li>Draft Figure 3 + benchmark report; plan round 2</li>
+    </ul>
+    <span class="milestone">M9: Figure 3 draft</span>
+  </div>
+
+</div>
+
+<div class="giant-arrow">
+  Agentic hypothesis-guided &gt; Non-agentic graph diffusion &gt; REINVENT4-style RL &gt; Expert rules &gt; Legacy LSTM &gt; Random enumeration
+</div>
+
+<div class="bottom-row">
+  <div class="card">
+    <h2>Generator lineup</h2>
+    <table>
+      <tr><th>Role</th><th>Model</th><th>Priority</th></tr>
+      <tr><td>Main</td><td>Conditional graph diffusion / graph Transformer</td><td><span class="badge badge-ok">Primary</span></td></tr>
+      <tr><td>RL baseline</td><td>REINVENT4-style Transformer/RL</td><td><span class="badge badge-warn">W9</span></td></tr>
+      <tr><td>String baseline</td><td>SELFIES Transformer</td><td><span class="badge badge-tbd">W3</span></td></tr>
+      <tr><td>Low-data baseline</td><td>Legacy LSTM / CLM</td><td><span class="badge badge-tbd">W3</span></td></tr>
+      <tr><td>Expert baseline</td><td>Rule-based QI analogs</td><td><span class="badge badge-tbd">W4</span></td></tr>
+      <tr><td>Non-AI baseline</td><td>Random SME-like enumeration</td><td><span class="badge badge-tbd">W3</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Deliverables</h2>
+    <table>
+      <tr><th>#</th><th>Item</th><th>Target</th></tr>
+      <tr><td>1</td><td>Standardized SMEMol dataset</td><td><span class="badge badge-ok">Done</span></td></tr>
+      <tr><td>2</td><td>6 generators benchmarked</td><td><span class="badge badge-ok">Done</span></td></tr>
+      <tr><td>3</td><td>Conditional graph diffusion + multi-property control</td><td><span class="badge badge-ok">Done</span></td></tr>
+      <tr><td>4</td><td>Hypothesis-conditioned generation pipeline</td><td><span class="badge badge-ok">Done</span></td></tr>
+      <tr><td>5</td><td>Evaluation harness (10+ metrics)</td><td><span class="badge badge-ok">Done</span></td></tr>
+      <tr><td>6</td><td>DFT batch (50 mol) input files prepared</td><td><span class="badge badge-warn">Ready</span></td></tr>
+      <tr><td>7</td><td>Manuscript Figure 3 draft</td><td><span class="badge badge-tbd">Draft</span></td></tr>
+      <tr><td>8</td><td>Generator benchmark report</td><td><span class="badge badge-ok">Done</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Key risks</h2>
+    <table>
+      <tr><th>Risk</th><th>Mitigation</th></tr>
+      <tr><td>SMEMol data quality poor</td><td>Manual curation of 100-mol clean subset</td></tr>
+      <tr><td>Invalid anchor groups from diffusion</td><td>Anchor-validity reward + post-filter</td></tr>
+      <tr><td>Insufficient GPU</td><td>Cloud GPU; baselines on CPU</td></tr>
+      <tr><td>Hypothesis agent not ready by W10</td><td>Manual hypothesis → constraint templates</td></tr>
+      <tr><td>DFT unavailable in window</td><td>Freeze candidates; results later</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Integration (parallel tracks)</h2>
+    <table>
+      <tr><th>Agent</th><th>When</th><th>Feeds into</th></tr>
+      <tr><td>Literature</td><td>M1–2</td><td>Expanded training data (Tier D)</td></tr>
+      <tr><td>Predictor / SMEPre</td><td>M1–2</td><td>Surrogate scoring + uncertainty for filtering</td></tr>
+      <tr><td>Hypothesis</td><td>M2</td><td>Constraints for W10 generation</td></tr>
+      <tr><td>Critic</td><td>M2–3</td><td>Post-generation quality filter</td></tr>
+      <tr><td>Quantum-transport</td><td>M3</td><td>DFT+NEGF on 50-mol batch</td></tr>
+    </table>
   </div>
 </div>
 
-<!-- ========== MONTH 1 ========== -->
-<h2 id="month-1">2. Month 1: Data Foundation &amp; Baselines <span class="badge badge-ok">May 26 — Jun 26</span></h2>
-
-<h3>Week 1–2: Dataset Audit and Standardization</h3>
-
-<ul>
-  <li>Audit SMEMol dataset: deduplicate, validate SMILES, standardize canonical SMILES and SELFIES</li>
-  <li>Verify anchor-group labels (thiol, amino, pyridyl, etc.) for every molecule</li>
-  <li>Assign scaffold IDs and analog-series labels</li>
-  <li>Tag data tier (A/B/C) and split assignment (scaffold split preferred)</li>
-  <li>Export to <code>data/processed/smemol_standardized.csv</code></li>
-  <li>Document missing labels, unresolved duplicates, provenance gaps in <code>docs/dataset_audit.md</code></li>
-</ul>
-
-<div class="milestone">M1: Clean, versioned dataset with provenance — first <code>data/</code> commit</div>
-
-<h3>Data Tiers</h3>
-<table>
-  <tr><th>Tier</th><th>Content</th><th>Use</th></tr>
-  <tr><td>Tier A</td><td>Original SMEMol literature molecules (171)</td><td>Seed dataset</td></tr>
-  <tr><td>Tier B</td><td>Legacy generated + DFT-validated molecules</td><td>Active-learning history</td></tr>
-  <tr><td>Tier C</td><td>Existing experimental molecules (Gen1/Gen9/SME1)</td><td>Legacy experimental anchors</td></tr>
-  <tr><td>Tier D</td><td>Newly mined literature molecules</td><td>Dataset expansion</td></tr>
-  <tr><td>Tier E</td><td>Newly generated prospective candidates</td><td>Active-learning candidates</td></tr>
-  <tr><td>Tier F</td><td>Locked prospective validation set</td><td>Final test set</td></tr>
-</table>
-
-<p>
-Important rule: Do <strong>not</strong> treat the legacy 338-molecule mixed set as a clean independent
-dataset. The relationship is:
-</p>
-
-<div class="math">
-$$\mathcal{D}_{338} = \mathcal{D}_{A} \cup \mathcal{D}_{\text{generated}} \quad \text{(active-learning history, NOT i.i.d.)}$$
-</div>
-
-<h3>Week 3: Legacy Baselines — Reproduce and Benchmark</h3>
-
-<ul>
-  <li>Re-run legacy LSTM generator on the standardized dataset</li>
-  <li>Re-run SMEPre predictor on generated molecules</li>
-  <li>Implement SELFIES Transformer baseline (char-level Transformer on SELFIES strings)</li>
-  <li>Implement random SME-like enumeration with fragment pool + valence/SMILES filter</li>
-</ul>
-
-<div class="milestone">M2: Three baselines running (LSTM, SELFIES Transformer, random) with metrics logged</div>
-
-<h3>Week 4: Evaluation Framework and Expert-Rule Baseline</h3>
-
-<ul>
-  <li>Build evaluation harness: unified CLI script with all metrics output</li>
-  <li>Implement expert-rule baseline: QI-motif catalog + anchor combination enumeration</li>
-  <li>Define property-conditioning schema: DQI, Seebeck, regulation range/efficiency, scaffold</li>
-</ul>
-
-<div class="milestone">M3: Evaluation harness usable from CLI; five baselines benchmarked</div>
-
-<h4>Generative Metrics</h4>
-<table>
-  <tr><th>Metric</th><th>Definition</th><th>Type</th></tr>
-  <tr><td>Validity</td><td>Fraction of outputs that are valid SMILES with correct valence</td><td>Quality</td></tr>
-  <tr><td>Uniqueness</td><td>Fraction of valid outputs that are unique</td><td>Diversity</td></tr>
-  <tr><td>Novelty</td><td>Fraction not in training set</td><td>Generalization</td></tr>
-  <tr><td>Diversity</td><td>Mean pairwise Tanimoto distance (ECFP4)</td><td>Coverage</td></tr>
-  <tr><td>Scaffold novelty</td><td>Fraction with Bemis-Murcko scaffolds not in training</td><td>Generalization</td></tr>
-  <tr><td>Anchor validity</td><td>Fraction with exactly 2 valid anchor groups</td><td>SME-specific</td></tr>
-  <tr><td>SAscore distribution</td><td>Synthetic accessibility score histogram</td><td>Feasibility</td></tr>
-  <tr><td>Property controllability</td><td>$\mathbb{E}[|y_{\text{target}} - \hat{y}_{\text{SMEPre}}|]$</td><td>Conditioning</td></tr>
-  <tr><td>DFT hit rate</td><td>Fraction confirmed by DFT under matched budget</td><td>Ultimate</td></tr>
-  <tr><td>Hypothesis alignment</td><td>Fraction matching hypothesis constraints</td><td>Agentic</td></tr>
-</table>
-
-<!-- ========== MONTH 2 ========== -->
-<h2 id="month-2">3. Month 2: Conditional Graph Generator <span class="badge badge-warn">Jun 26 — Jul 26</span></h2>
-
-<h3>Week 5–6: Molecular Graph Representation and Diffusion Setup</h3>
-
-<ul>
-  <li>Choose framework: <strong>DiGress</strong> (discrete graph diffusion) or <strong>MiDi</strong> (molecular graph diffusion)</li>
-  <li>Implement SME-specific featurization: S, N, O, Au-binding atoms, anchor-group tokens, scaffold-level graph features</li>
-  <li>Set up training pipeline with scaffold-split train/val/test</li>
-  <li>Train unconditional model; evaluate basic generation quality vs baselines</li>
-  <li>Implement conditional generation: property regression head, classifier-free guidance</li>
-</ul>
-
-<div class="milestone">M4: Unconditional graph diffusion running, generating valid SME molecules</div>
-
-<h3>Generator Architecture Comparison</h3>
-<table>
-  <tr><th>Role</th><th>Model</th><th>Priority</th></tr>
-  <tr><td>Main model</td><td>Conditional graph diffusion / graph Transformer</td><td><span class="badge badge-ok">Primary</span></td></tr>
-  <tr><td>Strong baseline</td><td>REINVENT4-style Transformer/RL</td><td><span class="badge badge-warn">Secondary</span></td></tr>
-  <tr><td>Low-data baseline</td><td>Original LSTM / CLM</td><td><span class="badge badge-tbd">Baseline</span></td></tr>
-  <tr><td>String baseline</td><td>SELFIES Transformer</td><td><span class="badge badge-tbd">Baseline</span></td></tr>
-  <tr><td>Non-AI baseline</td><td>Random SME-like enumeration</td><td><span class="badge badge-tbd">Baseline</span></td></tr>
-  <tr><td>Expert baseline</td><td>Rule-based quantum-interference analogs</td><td><span class="badge badge-tbd">Baseline</span></td></tr>
-</table>
-
-<h3>Week 7–8: Conditioning and Property Control</h3>
-
-<ul>
-  <li>Train conditional model with multi-property conditioning:
-    <div class="math">$$\mathbf{c} = [\text{DQI}, S, \Delta G_{\text{reg}}, \eta_{\text{reg}}, \text{SAscore}, \text{scaffold}]$$</div>
-  </li>
-  <li>Measure property controllability:
-    <div class="math">$$\text{Controllability}(p) = \mathbb{E}\left[|c_p - \hat{y}_p(G_{\text{gen}})|\right]$$</div>
-  </li>
-  <li>Implement scaffold-conditioned generation (generate analogs of a given scaffold)</li>
-  <li>Anchor-group validity filter: post-hoc check for exactly 2 valid anchor groups</li>
-</ul>
-
-<div class="milestone">M5: Conditional generator with quantitative property control</div>
-
-<h3>Week 9: REINVENT4-Style RL Baseline</h3>
-
-<ul>
-  <li>Implement REINVENT4-style baseline:
-    <div class="math">$$\pi_\theta(a \mid s) \leftarrow \text{RL}\left(\text{Transformer}, \; R(x) = w_1 \cdot \text{SMEPre}(x) + w_2 \cdot \text{SAscore}(x) + w_3 \cdot \mathbf{1}[\text{anchor valid}]\right)$$</div>
-  </li>
-  <li>Run head-to-head against conditional graph diffusion under matched compute budget</li>
-</ul>
-
-<div class="milestone">M6: Sixth baseline operational; first head-to-head comparison</div>
-
-<!-- ========== MONTH 3 ========== -->
-<h2 id="month-3">4. Month 3: Agentic Loop &amp; Prospective Validation <span class="badge badge-warn">Jul 26 — Aug 26</span></h2>
-
-<h3>Week 10–11: Hypothesis-Conditioned Generation</h3>
-
-<ul>
-  <li>Integrate with hypothesis agent: translate hypotheses to molecular constraints</li>
-  <li>Implement constraint-to-generation mapping:
-    <div class="math">$$\text{Hypothesis } \mathcal{H} \xrightarrow{f_{\text{map}}} \{\text{scaffold}, \text{substituents}, \text{anchors}, \text{property targets}\} \xrightarrow{g_{\text{gen}}} \text{Molecules}$$</div>
-  </li>
-  <li>Generate molecules conditioned on 3–5 specific quantum-interference hypotheses</li>
-  <li>Critic agent review: filter generated candidates through the reviewer checklist</li>
-</ul>
-
-<div class="milestone">M7: End-to-end hypothesis → generation → critique pipeline working</div>
-
-<h3>Example Hypotheses to Test</h3>
-<ol>
-  <li>Asymmetric heteroatom placement shifts antiresonance closer to the Fermi level</li>
-  <li>Cross-conjugated donor–acceptor motifs amplify gate sensitivity</li>
-  <li>Non-classical anchor alignment creates hidden destructive QI channels</li>
-  <li>Heteroaromatic fusion breaks expected magic-ratio behavior</li>
-  <li>Anchor-induced level alignment can dominate over classical connectivity rules</li>
-</ol>
-
-<h3>Week 12: Active-Learning Round 1 and Benchmark</h3>
-
-<p>Run the full active-learning loop at small scale:</p>
-
-<pre><code>Generate 50,000 molecules
-  ↓ Validity / anchor / chemistry filters
-  ↓ SMEPre surrogate scoring + uncertainty
-  ↓ Diversity and novelty selection
-  ↓ Hypothesis and critic-agent review
-  ↓ Retrosynthesis / synthetic feasibility filter
-  ↓ Select 50 molecules for DFT+NEGF</code></pre>
-
-<h4>Selection Policy (per DFT round)</h4>
-<table>
-  <tr><th>Class</th><th>Fraction</th><th>Purpose</th></tr>
-  <tr><td>Exploitation</td><td>40%</td><td>Highest predicted performance</td></tr>
-  <tr><td>Exploration</td><td>40%</td><td>Novel scaffolds or high uncertainty</td></tr>
-  <tr><td>Controls</td><td>20%</td><td>Negative, borderline, expert, or isomeric controls</td></tr>
-</table>
-
-<div class="milestone">M8: Benchmark table with all six generators; DFT batch ready</div>
-
-<h3>Week 13: Analysis, Documentation, and Manuscript Figure 3</h3>
-
-<ul>
-  <li>Analyze benchmark results: which generator finds more DQI candidates, novel scaffolds</li>
-  <li>Compute matched-budget efficiency: DFT hit rate per 50 candidates, scaffold novelty vs SAscore Pareto</li>
-  <li>Draft Figure 3 (prospective agentic design benchmark) and supporting tables</li>
-  <li>Write <code>docs/generator_benchmark.md</code>: methods, metrics, results, limitations</li>
-</ul>
-
-<div class="milestone">M9: Figure 3 draft + benchmark report; plan DFT round 2 targets</div>
-
-<!-- ========== DELIVERABLES ========== -->
-<h2 id="deliverables">5. Deliverables at 3 Months</h2>
-<table>
-  <tr><th>#</th><th>Deliverable</th><th>Status target</th></tr>
-  <tr><td>1</td><td>Standardized SMEMol dataset, versioned, provenance-tracked</td><td><span class="badge badge-ok">Complete</span></td></tr>
-  <tr><td>2</td><td>Six generators benchmarked (LSTM, SELFIES TF, random, expert, REINVENT4, graph diffusion)</td><td><span class="badge badge-ok">Complete</span></td></tr>
-  <tr><td>3</td><td>Conditional graph diffusion generator with multi-property control</td><td><span class="badge badge-ok">Complete</span></td></tr>
-  <tr><td>4</td><td>Hypothesis-conditioned generation pipeline</td><td><span class="badge badge-ok">Complete</span></td></tr>
-  <tr><td>5</td><td>Evaluation harness with 10+ metrics</td><td><span class="badge badge-ok">Complete</span></td></tr>
-  <tr><td>6</td><td>First active-learning DFT batch (50 molecules) selected, input files prepared</td><td><span class="badge badge-warn">Ready for DFT</span></td></tr>
-  <tr><td>7</td><td>Manuscript Figure 3 draft</td><td><span class="badge badge-tbd">Draft</span></td></tr>
-  <tr><td>8</td><td>Generator benchmark report</td><td><span class="badge badge-ok">Complete</span></td></tr>
-</table>
-
-<!-- ========== RISKS ========== -->
-<h2 id="risks">6. Dependencies &amp; Risks</h2>
-
-<div class="risk-grid">
-  <div class="risk-header">Risk</div>
-  <div class="risk-header">Impact</div>
-  <div class="risk-header">Mitigation</div>
-
-  <div>SMEMol data quality worse than expected</div>
-  <div>Blocks Week 1–2</div>
-  <div>Fall back to manual curation of 100-molecule clean subset</div>
-
-  <div>Graph diffusion produces invalid anchor groups at high rate</div>
-  <div>Delays Week 7–8</div>
-  <div>Add anchor-validity reward to training; post-generation filter</div>
-
-  <div>Insufficient GPU / compute</div>
-  <div>Slows training</div>
-  <div>Use cloud GPU; REINVENT4 and LSTM baselines run on CPU</div>
-
-  <div>Hypothesis agent not ready by Week 10</div>
-  <div>Blocks Week 10–11</div>
-  <div>Use manually-written hypothesis → constraint templates</div>
-
-  <div>DFT compute not available within 3-month window</div>
-  <div>Blocks Week 12</div>
-  <div>Define batch and freeze candidates; DFT results arrive later</div>
-</div>
-
-<!-- ========== INTEGRATION ========== -->
-<h2 id="integration">7. Integration Points (Parallel Tracks)</h2>
-<table>
-  <tr><th>Agent</th><th>Timeline</th><th>Interface with Generator</th></tr>
-  <tr><td>Literature agent</td><td>Month 1–2</td><td>Expands Tier D molecules; generator needs updated training data</td></tr>
-  <tr><td>Predictor / SMEPre</td><td>Month 1–2</td><td>Provides surrogate scoring for conditioning and filtering</td></tr>
-  <tr><td>Hypothesis agent</td><td>Month 2</td><td>Provides constraints for Week 10 hypothesis-conditioned generation</td></tr>
-  <tr><td>Critic agent</td><td>Month 2–3</td><td>Provides post-generation filter in Week 11</td></tr>
-  <tr><td>Quantum-transport agent</td><td>Month 3</td><td>Runs DFT+NEGF on the 50-molecule batch</td></tr>
-</table>
-
-<!-- ========== ARCHITECTURE ========== -->
-<h2 id="architecture">8. System Architecture</h2>
-
-<pre><code>Literature Agent → Hypothesis Agent → Design Agent → Quantum-Transport Agent
-                                                    ↓
-                                              Synthesis Agent
-                                                    ↓
-                                               Experiment
-                                                    ↓
-                                   Critic Agent → Revised Hypotheses</code></pre>
-
-<p>The key advance is <strong>not</strong> merely using a newer generator. The old pipeline:</p>
-
-<pre><code>Generate → Predict → Validate → Update</code></pre>
-
-<p>is standard in AI-for-science by 2026. The agentic framing is what makes this
-project methodologically novel.</p>
-
-<h4>Innovation Target</h4>
-<table>
-  <tr><th>Version</th><th>Method novelty</th><th>Domain novelty</th><th>Journal attractiveness</th></tr>
-  <tr><td>Legacy LSTM + SMEPre + DFT loop</td><td>2/10</td><td>5–6/10</td><td>3/10</td></tr>
-  <tr><td>Graph diffusion + active learning</td><td>4–5/10</td><td>7/10</td><td>5–6/10</td></tr>
-  <tr><td>Agentic hypothesis-driven SME discovery</td><td>6–7/10</td><td>8/10</td><td>7–8/10</td></tr>
-  <tr><td>Discovery of a <em>new</em> SME design rule</td><td>7–8/10</td><td>9/10</td><td>Nature-competitive</td></tr>
-</table>
-
-<!-- ========== FIGURE 3 ========== -->
-<h2 id="manuscript">9. Manuscript Figure 3 Specification</h2>
-
-<p><strong>Figure 3 — Prospective agentic design benchmark.</strong></p>
-<p>Compare under <strong>matched DFT+NEGF budgets</strong>:</p>
-
-<div class="math">$$\text{agentic hypothesis-guided} \;>\; \text{non-agentic graph diffusion} \;>\; \text{REINVENT4-style RL} \;>\; \text{expert rules} \;>\; \text{legacy LSTM} \;>\; \text{random enumeration}$$</div>
-
-<h4>Panel Layout</h4>
-<table>
-  <tr><th>Panel</th><th>Content</th><th>Message</th></tr>
-  <tr><td>(a)</td><td>DFT hit rate vs generator (bar chart, 6 generators)</td><td>Agentic design is more efficient under matched compute</td></tr>
-  <tr><td>(b)</td><td>Scaffold novelty vs SAscore (scatter, colored by generator)</td><td>Agentic design explores novel, synthesizable space</td></tr>
-  <tr><td>(c)</td><td>Property controllability (radar: DQI, Seebeck, regulation)</td><td>Conditional generation achieves target properties</td></tr>
-  <tr><td>(d)</td><td>Hypothesis confirmation rate (stacked bar)</td><td>Each hypothesis yields confirmatory/contradictory evidence</td></tr>
-  <tr><td>(e)</td><td>Active-learning trajectory: DFT hit rate vs round</td><td>Learning improves over rounds</td></tr>
-  <tr><td>(f)</td><td>Selected molecule examples (2D structures, 2×3 grid)</td><td>Qualitative inspection of top candidates</td></tr>
-</table>
-
-<h4>Essential Ablations</h4>
-<table>
-  <tr><th>Ablation</th><th>Question</th></tr>
-  <tr><td>No active learning</td><td>Does the loop matter?</td></tr>
-  <tr><td>No uncertainty</td><td>Does uncertainty improve discovery?</td></tr>
-  <tr><td>No DFT feedback</td><td>Are gains just generator bias?</td></tr>
-  <tr><td>No SMEPre/surrogate filter</td><td>Does screening help?</td></tr>
-  <tr><td>LSTM vs graph diffusion</td><td>Does the new generator matter?</td></tr>
-  <tr><td>Random vs AI</td><td>Is AI better than brute force?</td></tr>
-  <tr><td>Expert rules vs AI</td><td>Is AI discovering beyond known design rules?</td></tr>
-  <tr><td><strong>Agentic vs non-agentic generator</strong></td><td><strong>Does hypothesis-guided reasoning help?</strong></td></tr>
-  <tr><td>With vs without critic agent</td><td>Does critique reduce false positives?</td></tr>
-</table>
-
-<footer>
-  SME-Agent &middot; Generative Research Plan &middot; v1.0 &middot; May 2026<br>
-  Rendered with <span class="math">$\mathrm{\LaTeX}$</span> via MathJax
-</footer>
+<footer>SME-Agent &middot; Generative plan v2 &middot; May 2026</footer>
 
 </div>
 </body>
