@@ -1,3 +1,5 @@
+> **English** | [中文](README.zh-CN.md)
+
 # SME-Agent
 
 A physics-grounded, hypothesis-driven multi-agent discovery framework for quantum-interference single-molecule electronics.
