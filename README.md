@@ -97,7 +97,6 @@ python scripts/run_benchmarks.py --generator random_enum --n 10000
 |---|---|
 | [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | Full project specification, architecture, dataset strategy, agent instructions |
 | [`.claude/MEMORY.md`](.claude/MEMORY.md) | Project history, source documents, 3-month research plan |
-| [`docs/research-plan.html`](docs/research-plan.html) | Visual research plan |
 | [`docs/literature-survey.html`](docs/literature-survey.html) | Domain literature survey |
 | [`docs/literature-survey-ai-sme.html`](docs/literature-survey-ai-sme.html) | AI-for-SME literature survey |
 
