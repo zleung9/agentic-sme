@@ -206,7 +206,7 @@ score.
 
 | Role | Model |
 |---|---|
-| Main model | Conditional graph diffusion / graph Transformer generator |
+| Main model | Conditional graph diffusion (DiGress) with TransformerConv backbone — efficient global signal propagation at small dataset sizes; Graph DiT upgrade path when data >500 molecules |
 | Strong practical baseline | REINVENT4-style Transformer/RL or scaffold-decorating workflow |
 | Low-data baseline | Original LSTM / CLM |
 | Non-AI baseline | Random SME-like enumeration |
@@ -351,7 +351,14 @@ diagnostics; scaffold-split performance; locked-test performance; ablation table
 
 ### Generator plan
 
-Main generator: conditional graph diffusion / graph Transformer.
+Main generator: conditional graph diffusion — DiGress with a TransformerConv backbone (PyG).
+
+This choice was made after comparing DiGress (GNN-based discrete diffusion) with Graph DiT (Transformer-based discrete diffusion).
+
+- **DiGress** uses a GNN denoiser (default RGCN), which is more data-efficient and captures local anchor substructures well, but propagates global information only through K layers of message passing, risking oversmoothing.
+- **Graph DiT** uses a full Transformer with graph-aware positional encodings, offering built-in long-range attention that is physically more faithful to quantum interference (a global effect across the whole molecular junction). However, on the ~171-molecule seed dataset it would struggle to learn meaningful attention patterns.
+
+The **TransformerConv backbone** (PyG) replaces DiGress's default RGCN with local-attention GNN layers — the pragmatic sweet spot. It preserves data efficiency while enabling better long-range signal propagation than pure RGCN. A full Graph DiT upgrade is planned once Tier D data expands beyond ~500 molecules.
 
 Baselines: legacy LSTM; SELFIES Transformer; REINVENT4-style Transformer/RL;
 random SME-like enumeration; expert-rule enumeration; Bayesian optimization over
