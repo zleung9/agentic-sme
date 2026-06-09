@@ -97,7 +97,6 @@ python scripts/run_benchmarks.py --generator random_enum --n 10000
 |---|---|
 | [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | 完整项目规范、架构、数据集策略、智能体指令 |
 | [`.claude/MEMORY.md`](.claude/MEMORY.md) | 项目历史、源文档、3 个月研究计划 |
-| [`docs/research-plan.html`](docs/research-plan.html) | 可视化研究计划 |
 | [`docs/literature-survey.html`](docs/literature-survey.html) | 领域文献综述 |
 | [`docs/literature-survey-ai-sme.html`](docs/literature-survey-ai-sme.html) | AI-for-SME 文献综述 |
 
