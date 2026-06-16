@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SME-Agent: Comprehensive Literature Survey</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #c9d1d9; --text-muted: #8b949e; --accent: #58a6ff;
+    --accent-alt: #3fb950; --warn: #d29922; --danger: #f85149;
+    --code-bg: #1c2128;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 14px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem; }
+
+  header { border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 2rem; }
+  header h1 { font-size: 1.6rem; color: var(--accent); margin-bottom: 0.25rem; }
+  header .meta { color: var(--text-muted); font-size: 0.85rem; }
+  header .meta span { margin-right: 1.5rem; }
+
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 2rem; }
+  .toc h2 { font-size: 1rem; color: var(--accent); margin-bottom: 0.75rem; }
+  .toc ol { list-style: none; padding: 0; columns: 2; column-gap: 1.5rem; }
+  .toc li { margin-bottom: 0.3rem; font-size: 0.85rem; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .section { margin-bottom: 2.5rem; }
+  .section h2 { font-size: 1.2rem; color: var(--accent-alt); border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin-bottom: 1rem; }
+  .section h3 { font-size: 1rem; color: var(--accent); margin: 1rem 0 0.5rem; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+  .card .title { font-weight: 600; color: var(--text); }
+  .card .title a { color: var(--accent); text-decoration: none; }
+  .card .title a:hover { text-decoration: underline; }
+  .card .authors { font-size: 0.82rem; color: var(--text-muted); margin: 0.15rem 0; }
+  .card .venue { font-size: 0.78rem; color: var(--warn); }
+  .card .abstract { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem; line-height: 1.5; }
+  .card .tags { margin-top: 0.35rem; }
+  .card .tag { display: inline-block; padding: 0.1em 0.5em; border-radius: 8px; font-size: 0.7rem; font-weight: 600; margin-right: 0.35rem; background: #1a2233; color: var(--accent); }
+
+  .summary-box { background: #1a2a1a; border: 1px solid var(--accent-alt); border-radius: 6px; padding: 0.75rem 1rem; margin: 0.75rem 0; }
+  .summary-box h4 { color: var(--accent-alt); font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .summary-box p { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+
+  .gap-box { background: #2a1a1a; border: 1px solid var(--danger); border-radius: 6px; padding: 0.75rem 1rem; margin: 0.75rem 0; }
+  .gap-box h4 { color: var(--danger); font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .gap-box p { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+
+  .nav-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .nav-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 0.3rem 0.7rem; border-radius: 4px; font-size: 0.78rem; cursor: pointer; }
+  .nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 0.75rem 0; }
+  th, td { padding: 0.4rem 0.6rem; text-align: left; border: 1px solid var(--border); }
+  th { background: var(--surface); color: var(--accent); font-weight: 600; }
+
+  footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; text-align: center; }
+
+  @media (max-width: 700px) { .toc ol { columns: 1; } .container { padding: 1rem; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Comprehensive Literature Survey: Single-Molecule Electronics &amp; Agentic AI for Molecular Discovery</h1>
+  <div class="meta">
+    <span>SME-Agent Project</span>
+    <span>2026-06-08</span>
+    <span>arXiv-based survey</span>
+  </div>
+  <p style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">
+    This page surveys the research landscape across six domains relevant to building a
+    physics-grounded agentic molecular co-scientist for quantum-interference single-molecule
+    electronics (SME). Each section identifies key papers, summarizes the state of the art,
+    and notes gaps where the SME-Agent project can contribute.
+  </p>
+</header>
+
+<div class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#s1">1. Single-Molecule Electronics &amp; Quantum Interference</a></li>
+    <li><a href="#s2">2. AI for Molecular Discovery &amp; Generative Design</a></li>
+    <li><a href="#s3">3. Graph Diffusion &amp; Graph Transformers for Molecules</a></li>
+    <li><a href="#s4">4. Agentic AI for Scientific Discovery</a></li>
+    <li><a href="#s5">5. Uncertainty-Quantified Molecular Property Prediction</a></li>
+    <li><a href="#s6">6. Retrosynthesis, Synthetic Accessibility &amp; Active Learning</a></li>
+    <li><a href="#s7">7. Cross-Cutting Analysis &amp; Project Positioning</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 1: Single-Molecule Electronics & Quantum Interference -->
+<!-- ============================================================ -->
+<div class="section" id="s1">
+<h2>1. Single-Molecule Electronics &amp; Quantum Interference</h2>
+
+<div class="summary-box">
+<h4>Domain overview</h4>
+<p>
+Single-molecule electronics studies charge transport through individual molecules
+sandwiched between electrodes. Quantum interference (QI) — both constructive (CQI)
+and destructive (DQI) — dramatically modulates conductance and is the central
+physical mechanism the SME-Agent project seeks to harness. Key themes include the
+magic ratio rule (MRR), connectivity-driven QI, heteroatom substitution effects,
+gate-controlled transport, and the transition from fundamental physics to
+functional devices.
+</p>
+</div>
+
+<h3>Foundation and theory</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1601.00224">Basic concepts in single-molecule electronics</a></div>
+  <div class="authors">C. J. Lambert</div>
+  <div class="venue">arXiv:1601.00224 (2016) — Tutorial</div>
+  <div class="abstract">
+    Outlines the basic theoretical concepts for phase-coherent electron transport
+    through single molecules. The transmission coefficient T(E) is the central quantity,
+    yielding conductance, thermopower, and current–voltage characteristics. Establishes
+    the Landauer–Büttiker formalism as the foundation for molecular junction transport.
+  </div>
+  <div class="tags"><span class="tag">foundation</span><span class="tag">theory</span><span class="tag">NEGF</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1509.00990">A quantum circuit rule for interference effects in single-molecule electrical junctions</a></div>
+  <div class="authors">David Zsolt Manrique, Cancan Huang, Masoud Baghernejad, Xiaotao Zhao, Oday A. Al-Owaedi, Hatef Sadeghi, Veerabhadrarao Kaliginedi, Wenjing Hong, Murat Gulcur, Thomas Wandlowski, Martin R. Bryce, Colin J. Lambert</div>
+  <div class="venue">arXiv:1509.00990 (2015) — Nature Communications?</div>
+  <div class="abstract">
+    A quantum circuit rule for combining QI effects in OPE-type molecules with three
+    aromatic rings. Molecules with different connection topologies (ortho, meta, para)
+    show conductance ratios consistent with magic number theory. Combined experimental
+    (MCBJ) and DFT demonstration.
+  </div>
+  <div class="tags"><span class="tag">quantum circuit rule</span><span class="tag">OPE</span><span class="tag">MCBJ</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1712.06187">A Magic Ratio Rule for Beginners: a Chemist's Guide to Quantum Interference in Molecules</a></div>
+  <div class="authors">Colin J. Lambert, Shi-Xia Liu</div>
+  <div class="venue">arXiv:1712.06187 (2017) — Overview</div>
+  <div class="abstract">
+    Provides chemical design principles for exploiting QI in molecular-scale devices.
+    The magic ratio rule (MRR) connects molecular connectivity to conductance ratios,
+    giving chemists a simple predictive framework. Covers PAHs, graphene-like molecules,
+    and heteroatom-substituted systems.
+  </div>
+  <div class="tags"><span class="tag">magic ratio rule</span><span class="tag">design principles</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1509.00982">Magic ratios for connectivity-driven electrical conductance of graphene-like molecules</a></div>
+  <div class="authors">Yan Geng, Sara Sangtarash, Cancan Huang, Hatef Sadeghi, Yongchun Fu, Wenjing Hong, Thomas Wandlowski, Silvio Decurtins, Colin J. Lambert, Shi-Xia Liu</div>
+  <div class="venue">arXiv:1509.00982 (2015)</div>
+  <div class="abstract">
+    Experimental (MCBJ) and DFT demonstration of the magic ratio rule (MRR) for
+    graphene-like aromatic molecules. Connectivity alone determines conductance ratios,
+    providing a simple predictive tool for molecular junction design.
+  </div>
+  <div class="tags"><span class="tag">magic ratio rule</span><span class="tag">graphene-like</span><span class="tag">MCBJ</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1903.03312">On the resilience of magic number theory for conductance ratios of aromatic molecules</a></div>
+  <div class="authors">Lara Ulčakar, Tomaž Rejec, Jure Kokalj, Sara Sangtarash, Hatef Sadeghi, Anton Ramšak, John H. Jefferson, Colin J. Lambert</div>
+  <div class="venue">arXiv:1903.03312 (2019)</div>
+  <div class="abstract">
+    Tests the robustness of magic number theory under realistic conditions including
+    electrode coupling variation, destructive QI, and heteroatom substitution. Finds
+    that magic ratios are surprisingly resilient, supporting MRR as a practical design tool.
+  </div>
+  <div class="tags"><span class="tag">magic ratio rule</span><span class="tag">robustness</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1612.02266">Destructive quantum interference in electron transport: A reconciliation of the molecular orbital and the atomic orbital perspective</a></div>
+  <div class="authors">Xin Zhao, Victor Geskin, Robert Stadler</div>
+  <div class="venue">arXiv:1612.02266 (2016)</div>
+  <div class="abstract">
+    Reconciles molecular orbital (MO) and atomic orbital (AO) perspectives on DQI.
+    Shows that DQI arises from symmetry-driven cancellation in electron transport,
+    bridging heuristic chemical rules and rigorous quantum transport theory.
+  </div>
+  <div class="tags"><span class="tag">DQI theory</span><span class="tag">MO vs AO</span></div>
+</div>
+
+<h3>Heteroatom substitution and chemical tuning</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1602.05215">Exploring quantum interference in heteroatom-substituted graphene-like molecules</a></div>
+  <div class="authors">Sara Sangtarash, Hatef Sadeghi, Colin J. Lambert</div>
+  <div class="venue">arXiv:1602.05215 (2016)</div>
+  <div class="abstract">
+    If design principles for controlling QI in single molecules could be elucidated,
+    this would lay foundations for exploiting QI in nanoscale devices. Studies how
+    heteroatom substitution in graphene-like molecules modifies QI patterns, providing
+    design rules for controlling transmission features.
+  </div>
+  <div class="tags"><span class="tag">heteroatom</span><span class="tag">QI control</span><span class="tag">design rules</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1509.00984">Searching the hearts of graphene-like molecules for simplicity, sensitivity and logic</a></div>
+  <div class="authors">Sara Sangtarash, Cancan Huang, Hatef Sadeghi, Gleb Sorohhov, Jürg Hauser, Thomas Wandlowski, Wenjing Hong, Silvio Decurtins, Shi-Xia Liu, Colin J. Lambert</div>
+  <div class="venue">arXiv:1509.00984 (2015)</div>
+  <div class="abstract">
+    Isolates QI patterns in the "hearts" of PAHs. Demonstrates that QI features
+    can be manipulated for logic and sensing applications. Key step in moving from
+    single-molecule physics to functional device concepts.
+  </div>
+  <div class="tags"><span class="tag">PAH</span><span class="tag">QI logic</span><span class="tag">sensing</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1510.06015">On the illusory connection between cross-conjugation and quantum interference</a></div>
+  <div class="authors">Kim G. L. Pedersen, Anders Borges, Per Hedegård, Gemma C. Solomon, Mikkel Strange</div>
+  <div class="venue">arXiv:1510.06015 (2015)</div>
+  <div class="abstract">
+    Challenges the common assumption that cross-conjugation directly implies DQI.
+    Shows through transport calculations that the relationship is more nuanced —
+    cross-conjugation does not guarantee DQI. Important caution for heuristic design rules.
+  </div>
+  <div class="tags"><span class="tag">cross-conjugation</span><span class="tag">cautionary</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2504.18665">Classifying destructive quantum interference in molecular junctions: Towards molecular quantum rulers</a></div>
+  <div class="authors">Lukas Krieger, Gert-Ludwig Ingold, Fabian Pauly</div>
+  <div class="venue">arXiv:2504.18665 (2025)</div>
+  <div class="abstract">
+    Proposes a classification scheme for DQI patterns in molecular junctions,
+    aiming to use DQI features as molecular quantum rulers — quantifying changes
+    in external control parameters electrically. Relevant for understanding which
+    DQI patterns are robust and exploitable.
+  </div>
+  <div class="tags"><span class="tag">DQI classification</span><span class="tag">quantum ruler</span><span class="tag">2025</span></div>
+</div>
+
+<h3>Gate-controlled transport and functional devices</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1806.00124">Gate controlled quantum interference: direct observation of anti-resonances in single molecule charge transport</a></div>
+  <div class="authors">Yueqi Li, Marius Buerkle, Guangfeng Li, Ali Rostamian, Hui Wang, Zixiao Wang, David R. Bowler, Tsuyoshi Miyazaki, Yoshihiro Asai, Gang Zhou, Nongjian Tao</div>
+  <div class="venue">arXiv:1806.00124 (2018)</div>
+  <div class="abstract">
+    Direct observation of anti-resonances (DQI signatures) in gate-controlled
+    single-molecule transistors. Demonstrates that gating can tune the position
+    of QI features relative to the Fermi level, enabling transistor action.
+  </div>
+  <div class="tags"><span class="tag">gating</span><span class="tag">anti-resonance</span><span class="tag">experiment</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2304.08535">Quantum Interference Enhances the Performance of Single-Molecule Transistors</a></div>
+  <div class="authors">Zhixin Chen, Iain M. Grace, Steffen L. Woltering, Lina Chen, Alex Gee, Jonathan Baugh, G. Andrew D. Briggs, Lapo Bogani, Jan A. Mol, Colin J. Lambert, Harry L. Anderson, James O. Thomas</div>
+  <div class="venue">arXiv:2304.08535 (2023)</div>
+  <div class="abstract">
+    Shows that QI can enhance transistor performance at the single-molecule scale,
+    addressing the challenge of off-state leakage in nanoscale transistors.
+    Combines experiment and theory to demonstrate QI-improved switching.
+  </div>
+  <div class="tags"><span class="tag">transistor</span><span class="tag">QI enhancement</span><span class="tag">2023</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2208.08788">Fano Interference in a Single-Molecule Junction</a></div>
+  <div class="authors">Yiping Ouyang, Rui Wang, Deping Guo, Yang-Yang Ju, Danfeng Pan, Xuecou Tu, Lin Kang, Jian Chen, Peiheng Wu, Xuefeng Wang, Jianguo Wan, Minhao Zhang, Wei Ji, Yuan-Zhi Tan, Su-Yuan Xie, Fengqi Song</div>
+  <div class="venue">arXiv:2208.08788 (2022)</div>
+  <div class="abstract">
+    Demonstrates Fano interference in a single-molecule junction using
+    spirobifluorene with a built-in interference pathway. Opens new avenues for
+    quantum interference electronics at the molecular scale.
+  </div>
+  <div class="tags"><span class="tag">Fano interference</span><span class="tag">experiment</span><span class="tag">2022</span></div>
+</div>
+
+<h3>Thermoelectric and many-body effects</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1509.02817">Control of thermoelectric properties of phase-coherent molecular wires</a></div>
+  <div class="authors">Víctor M. García-Suarez, Colin J. Lambert, David Zs. Manrique, Thomas Wandlowski</div>
+  <div class="venue">arXiv:1509.02817 (2015)</div>
+  <div class="abstract">
+    Demonstrates redox control of intra-molecular QI to enhance thermopower (Seebeck
+    coefficient) and ZT. Establishes the connection between QI features and
+    thermoelectric performance in single-molecule junctions.
+  </div>
+  <div class="tags"><span class="tag">thermoelectric</span><span class="tag">Seebeck</span><span class="tag">redox control</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2210.17232">Quantum Interference and Contact Effects in Thermoelectric Performance of Anthracene-Based Molecules</a></div>
+  <div class="authors">Joseph M. Hamill, Ali Ismael, Alaa Al-Jobory, Troy L. R. Bennett, Maryam Alshahrani, Xintai Wang, Maxwell Akers-Douglas, Luke A. Wilkinson, Benjamin J. Robinson, Nicholas J. Long, Colin Lambert, Tim Albrecht</div>
+  <div class="venue">arXiv:2210.17232 (2022)</div>
+  <div class="abstract">
+    Studies anthracene-based molecules with different anchor groups (Au vs Pt).
+    Reveals interplay between QI, contact effects, and thermoelectric performance.
+    Important for understanding anchor group effects beyond simple connectivity rules.
+  </div>
+  <div class="tags"><span class="tag">anchor effects</span><span class="tag">thermoelectric</span><span class="tag">2022</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2510.07694">Thermoelectric Enhancement of Series-Connected Cross-Conjugated Molecular Junctions</a></div>
+  <div class="authors">Justin P. Bergfield</div>
+  <div class="venue">arXiv:2510.07694 (2025)</div>
+  <div class="abstract">
+    Investigates thermoelectric enhancement in cross-conjugated dendralene analogues
+    and iso-PDA motifs. Shows that series-connected node-possessing units can enhance
+    thermoelectric performance — relevant for the QI-thermoelectric coupling theme.
+  </div>
+  <div class="tags"><span class="tag">thermoelectric</span><span class="tag">cross-conjugated</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1612.04852">Kondo blockade due to quantum interference in single-molecule junctions</a></div>
+  <div class="authors">Andrew K. Mitchell, Kim G. L. Pedersen, Per Hedegaard, Jens Paaske</div>
+  <div class="venue">arXiv:1612.04852 (2016)</div>
+  <div class="abstract">
+    Reveals that QI can induce Kondo blockade — a many-body phenomenon where QI
+    suppresses the Kondo resonance. Important for understanding the interplay between
+    QI and strong correlation effects in molecular junctions.
+  </div>
+  <div class="tags"><span class="tag">Kondo</span><span class="tag">many-body</span><span class="tag">QI blockade</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2310.14775">Many-body quantum interference route to the two-channel Kondo effect</a></div>
+  <div class="authors">Sudeshna Sen, Andrew K. Mitchell</div>
+  <div class="venue">arXiv:2310.14775 (2023)</div>
+  <div class="abstract">
+    Proposes inverse design of molecular junctions to realize the two-channel Kondo
+    effect via many-body QI. Demonstrates that QI can be used not just to modulate
+    conductance but to engineer exotic quantum states.
+  </div>
+  <div class="tags"><span class="tag">Kondo</span><span class="tag">inverse design</span><span class="tag">2023</span></div>
+</div>
+
+<h3>EC-STMBJ and experimental techniques</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1611.02725">A Three State NDI Switch: Integration of Pendant Redox Unit for Conductance Tuning</a></div>
+  <div class="authors">Y. Li, M. Baghernejad, Q. Al-Galiby, D. Manrique, G. Zhang, J. Hamill, Y. Fu, P. Broekmann, W. Hong, T. Wandlowski, D. Zhang, C. J. Lambert</div>
+  <div class="venue">arXiv:1611.02725 (2016)</div>
+  <div class="abstract">
+    Uses EC-STMBJ (electrochemical STM break junction) to study NDI switches with
+    three conductance states. Combines experiment with DFT to demonstrate redox-gated
+    conductance switching — directly relevant to the experimental techniques used in
+    the legacy SMEGen project.
+  </div>
+  <div class="tags"><span class="tag">EC-STMBJ</span><span class="tag">redox switch</span><span class="tag">Hong group</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2001.03006">Unsupervised feature recognition in single molecule break junction data</a></div>
+  <div class="authors">A. Magyarkuti, N. Balogh, Z. Balogh, L. Venkataraman, A. Halbritter</div>
+  <div class="venue">arXiv:2001.03006 (2020)</div>
+  <div class="abstract">
+    Unsupervised ML for analyzing break junction conductance traces. Automates
+    feature recognition without human bias — relevant for scalable data processing
+    in the experimental validation pipeline.
+  </div>
+  <div class="tags"><span class="tag">ML for BJ data</span><span class="tag">unsupervised</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2004.10731">Unsupervised Segmentation-Based Machine Learning as an Advanced Analysis Tool for Single Molecule Break Junction Data</a></div>
+  <div class="authors">Nathan D. Bamberger, Jeffrey A. Ivie, Keshaba N. Parida, Dominic V. McGrath, Oliver L. A. Monti</div>
+  <div class="venue">arXiv:2004.10731 (2020)</div>
+  <div class="abstract">
+    Segmentation-based ML for break junction data analysis. Provides robust,
+    automated extraction of conductance features from large datasets.
+  </div>
+  <div class="tags"><span class="tag">ML for BJ data</span><span class="tag">segmentation</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2401.12769">Improving single-molecule conductance measurements with change point detection from the econometrics toolbox</a></div>
+  <div class="authors">Joseph M. Hamill, William Bro-Jørgensen, Zoltán Balogh, Haixing Li, Susanne Leitherer, David Solomon, András Halbritter, Gemma Solomon</div>
+  <div class="venue">arXiv:2401.12769 (2024)</div>
+  <div class="abstract">
+    Applies change point detection (from econometrics) to break junction data.
+    Detects structural breaks in conductance vs displacement traces — improving
+    automated analysis of molecular junction formation and rupture.
+  </div>
+  <div class="tags"><span class="tag">change point detection</span><span class="tag">2024</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2209.06266">Simulations of Heat Transport in Single-Molecule Junctions: Investigations of the Thermal Diode Effect</a></div>
+  <div class="authors">Jonathan J. Wang, Jie Gong, Alan J. H. McGaughey, Dvira Segal</div>
+  <div class="venue">arXiv:2209.06266 (2022)</div>
+  <div class="abstract">
+    MD simulations of phononic heat transport in metal-molecule-metal junctions.
+    Explores thermal diode behavior — relevant for understanding thermoelectric
+    and thermal management in molecular junctions.
+  </div>
+  <div class="tags"><span class="tag">heat transport</span><span class="tag">thermal diode</span></div>
+</div>
+
+<div class="gap-box">
+<h4>Gap identified for SME-Agent</h4>
+<p>
+While the MRR and connectivity rules are well established for simple aromatics,
+<strong>no systematic AI-driven exploration of novel QI motifs beyond known
+expert rules exists</strong>. The field has strong heuristic design rules for
+common cases (benzene, naphthalene, OPE, PAHs) but lacks automated tools for
+discovering <em>counterintuitive</em> or <em>non-classical</em> QI behavior.
+The SME-Agent hypothesis agent is designed to fill exactly this gap.
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 2: AI for Molecular Discovery & Generative Design -->
+<!-- ============================================================ -->
+<div class="section" id="s2">
+<h2>2. AI for Molecular Discovery &amp; Generative Design</h2>
+
+<div class="summary-box">
+<h4>Domain overview</h4>
+<p>
+AI-driven molecular generation has matured rapidly, moving from SMILES-based
+LSTMs (2017–2019) through VAEs and GANs to diffusion models and Transformer-based
+approaches. Reinforcement learning (REINVENT-style) remains a strong practical
+baseline. The key challenge for SME is conditioning generation on quantum-transport
+properties (DQI, Seebeck, gating) rather than drug-discovery properties (logP, QED,
+docking score), which have been the main focus of existing work.
+</p>
+</div>
+
+<h3>REINVENT and RL-based molecular generation</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2312.01267">Distributed Reinforcement Learning for Molecular Design: Antioxidant case</a></div>
+  <div class="authors">Huanyi Qin, Denis Akhiyarov, Sophie Loehle, Kenneth Chiu, Mauricio Araya-Polo</div>
+  <div class="venue">arXiv:2312.01267 (2023)</div>
+  <div class="abstract">
+    Distributed deep RL for molecular design using MolDQN-style algorithms.
+    Demonstrates RL-based molecular optimization at scale, relevant for the
+    REINVENT4-style baseline in the SME-Agent benchmark plan.
+  </div>
+  <div class="tags"><span class="tag">RL</span><span class="tag">MolDQN</span><span class="tag">distributed</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1904.08915">Decoding Molecular Graph Embeddings with Reinforcement Learning</a></div>
+  <div class="authors">Steven Kearnes, Li Li, Patrick Riley</div>
+  <div class="venue">arXiv:1904.08915 (2019)</div>
+  <div class="abstract">
+    RL-VAE: combines graph VAE with RL for molecular graph generation.
+    Graph-to-graph autoencoding with RL-based decoding for property optimization.
+  </div>
+  <div class="tags"><span class="tag">RL-VAE</span><span class="tag">graph generation</span></div>
+</div>
+
+<h3>SMILES/SELFIES-based generation</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2104.04345">A Graph VAE and Graph Transformer Approach to Generating Molecular Graphs</a></div>
+  <div class="authors">Joshua Mitton, Hans M. Senn, Klaas Wynne, Roderick Murray-Smith</div>
+  <div class="venue">arXiv:2104.04345 (2021)</div>
+  <div class="abstract">
+    Combines VAE and Transformer to operate directly on molecular graphs.
+    Novel node encoding layer replacing positional encodings. Demonstrates that
+    graph-native approaches can outperform string-based methods.
+  </div>
+  <div class="tags"><span class="tag">graph VAE</span><span class="tag">Transformer</span><span class="tag">graph-native</span></div>
+</div>
+
+<h3>Multi-objective and goal-directed generation</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2604.11483">CAGenMol: Condition-Aware Diffusion Language Model for Goal-Directed Molecular Generation</a></div>
+  <div class="authors">Yanting Li, Zhuoyang Jiang, Enyan Dai, Lei Wang, Wen-Cai Ye, Li Liu</div>
+  <div class="venue">arXiv:2604.11483 (2026)</div>
+  <div class="abstract">
+    Goal-directed molecular generation satisfying heterogeneous constraints
+    (protein-ligand compatibility, multi-objective drug-like properties).
+    Condition-aware diffusion language model. Very recent work highlighting
+    the trend toward multi-constraint conditioning.
+  </div>
+  <div class="tags"><span class="tag">goal-directed</span><span class="tag">multi-constraint</span><span class="tag">2026</span></div>
+</div>
+
+<div class="gap-box">
+<h4>Gap identified for SME-Agent</h4>
+<p>
+<strong>Almost no generative models condition on quantum-transport properties.</strong>
+Existing molecular generation is dominated by drug-discovery objectives (logP, QED,
+docking, solubility, synthetic accessibility). SME-Agent's Generative Design Agent
+would be among the first to condition generation on DQI features, Seebeck coefficient,
+regulation range, and anchor-group compatibility — a fundamentally different
+chemical space.
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 3: Graph Diffusion & Graph Transformers for Molecules -->
+<!-- ============================================================ -->
+<div class="section" id="s3">
+<h2>3. Graph Diffusion &amp; Graph Transformers for Molecular Generation</h2>
+
+<div class="summary-box">
+<h4>Domain overview</h4>
+<p>
+Graph diffusion models have become the state of the art for molecular generation,
+offering better coverage of chemical space and more natural handling of molecular
+graphs compared to SMILES-based approaches. Conditional graph diffusion (DiGress,
+GDSS, etc.) enables property-guided generation. Graph Transformers add global
+attention to GNN inductive biases for property prediction. The SME-Agent project
+targets a conditional graph diffusion generator as its primary model.
+</p>
+</div>
+
+<h3>Graph diffusion models</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2301.00427">Conditional Diffusion Based on Discrete Graph Structures for Molecular Graph Generation</a></div>
+  <div class="authors">Han Huang, Leilei Sun, Bowen Du, Weifeng Lv</div>
+  <div class="venue">arXiv:2301.00427 (2023)</div>
+  <div class="abstract">
+    Learns molecular graph distributions and generates high-fidelity samples using
+    discrete graph diffusion. Addresses the fundamental challenge of modeling
+    molecular graph distributions for drug discovery and materials science.
+  </div>
+  <div class="tags"><span class="tag">discrete diffusion</span><span class="tag">molecular graph</span><span class="tag">2023</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2401.13858">Graph Diffusion Transformers for Multi-Conditional Molecular Generation</a></div>
+  <div class="authors">Gang Liu, Jiaxin Xu, Tengfei Luo, Meng Jiang</div>
+  <div class="venue">arXiv:2401.13858 (2024)</div>
+  <div class="abstract">
+    <strong>Directly relevant.</strong> Graph Diffusion Transformers for multi-conditional
+    molecular generation, integrating properties such as synthetic score and gas
+    permeability. Combines diffusion with Transformer architecture — closest existing
+    work to the SME-Agent generative design agent architecture.
+  </div>
+  <div class="tags"><span class="tag">multi-conditional</span><span class="tag">diffusion transformer</span><span class="tag">2024</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2509.09451">Composable Score-based Graph Diffusion Model for Multi-Conditional Molecular Generation</a></div>
+  <div class="authors">Anjie Qiao, Zhen Wang, Chuan Chen, DeFu Lian, Enhong Chen</div>
+  <div class="venue">arXiv:2509.09451 (2025)</div>
+  <div class="abstract">
+    Composable score-based diffusion for multi-conditional molecular generation.
+    Supports diverse property constraints via composable score functions —
+    relevant for the SME-Agent conditioning on multiple transport properties.
+  </div>
+  <div class="tags"><span class="tag">composable</span><span class="tag">score-based</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2604.00236">Hierarchical Discrete Flow Matching for Graph Generation</a></div>
+  <div class="authors">Yoann Boget, Pablo Strasser, Alexandros Kalousis</div>
+  <div class="venue">arXiv:2604.00236 (2026)</div>
+  <div class="abstract">
+    Proposes flow matching as an alternative to diffusion for graph generation,
+    addressing O(n²) scaling issues. Flow matching may offer computational advantages
+    for the SME-Agent generator at scale.
+  </div>
+  <div class="tags"><span class="tag">flow matching</span><span class="tag">2026</span><span class="tag">scalable</span></div>
+</div>
+
+<h3>Graph Transformers for molecular property prediction</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2106.15516">GeoT: A Geometry-aware Transformer for Reliable Molecular Property Prediction</a></div>
+  <div class="authors">Bumju Kwak, Jiwon Park, Taewon Kang, Jeonghee Jo, Byunghan Lee, Sungroh Yoon</div>
+  <div class="venue">arXiv:2106.15516 (2021)</div>
+  <div class="abstract">
+    Geometry-aware molecular Transformer incorporating 3D structural information.
+    Demonstrates that geometric awareness improves property prediction reliability.
+  </div>
+  <div class="tags"><span class="tag">geometry-aware</span><span class="tag">Transformer</span><span class="tag">3D</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2206.03364">KPGT: Knowledge-Guided Pre-training of Graph Transformer for Molecular Property Prediction</a></div>
+  <div class="authors">Han Li, Dan Zhao, Jianyang Zeng</div>
+  <div class="venue">arXiv:2206.03364 (2022)</div>
+  <div class="abstract">
+    Knowledge-guided pre-training for Graph Transformers. Leverages biochemical
+    knowledge to improve molecular property prediction. Relevant for the
+    SME-Agent predictor ensemble.
+  </div>
+  <div class="tags"><span class="tag">pre-training</span><span class="tag">knowledge-guided</span><span class="tag">2022</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2210.01765">One Transformer Can Understand Both 2D & 3D Molecular Data</a></div>
+  <div class="authors">Shengjie Luo, Tianlang Chen, Yixian Xu, Shuxin Zheng, Tie-Yan Liu, Liwei Wang, Di He</div>
+  <div class="venue">arXiv:2210.01765 (2022)</div>
+  <div class="abstract">
+    Unified Transformer architecture handling both 2D graph and 3D conformer
+    representations. Demonstrates that a single model can benefit from both
+    topological and geometric molecular information.
+  </div>
+  <div class="tags"><span class="tag">2D+3D</span><span class="tag">unified</span><span class="tag">2022</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2604.06336">BiScale-GTR: Fragment-Aware Graph Transformers for Multi-Scale Molecular Representation Learning</a></div>
+  <div class="authors">Yi Yang, Ovidiu Daescu</div>
+  <div class="venue">arXiv:2604.06336 (2026)</div>
+  <div class="abstract">
+    Fragment-aware Graph Transformers capturing multi-scale molecular information
+    (atom, fragment, graph levels). Relevant for scaffold-aware generation and
+    property prediction in SME-Agent.
+  </div>
+  <div class="tags"><span class="tag">multi-scale</span><span class="tag">fragment-aware</span><span class="tag">2026</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2309.00483">Geometry-aware Line Graph Transformer Pre-training for Molecular Property Prediction</a></div>
+  <div class="authors">Peizhen Bai, Xinyuan Liu, Haiping Lu</div>
+  <div class="venue">arXiv:2309.00483 (2023)</div>
+  <div class="abstract">
+    Line Graph Transformer that explicitly captures bond and angle information.
+    Geometry-aware pre-training strategy. Relevant for capturing molecular geometry
+    effects on quantum transport.
+  </div>
+  <div class="tags"><span class="tag">line graph</span><span class="tag">geometry</span><span class="tag">pre-training</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2312.07633">SE(3)-Invariant Multiparameter Persistent Homology for Chiral-Sensitive Molecular Property Prediction</a></div>
+  <div class="authors">Andac Demir, Francis Prael, Bulent Kiziltan</div>
+  <div class="venue">arXiv:2312.07633 (2023)</div>
+  <div class="abstract">
+    Topological data analysis for molecular property prediction. SE(3)-invariant
+    features capturing chiral information — potentially relevant for capturing
+    subtle structural effects on QI.
+  </div>
+  <div class="tags"><span class="tag">topological</span><span class="tag">chirality</span><span class="tag">persistent homology</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2503.21686">Molecular Quantum Transformer</a></div>
+  <div class="authors">Yuichi Kamata, Quoc Hoan Tran, Yasuhiro Endo, Hirotaka Oshima</div>
+  <div class="venue">arXiv:2503.21686 (2025)</div>
+  <div class="abstract">
+    Proposes a quantum version of the Transformer for molecular tasks.
+    While early-stage, it signals the direction of quantum-enhanced molecular
+    representation learning.
+  </div>
+  <div class="tags"><span class="tag">quantum ML</span><span class="tag">Transformer</span><span class="tag">2025</span></div>
+</div>
+
+<div class="gap-box">
+<h4>Gap identified for SME-Agent</h4>
+<p>
+<strong>Existing graph diffusion models are trained on drug-like chemical spaces (QM9, ZINC, ChEMBL).</strong>
+They are not conditioned on quantum-transport features (DQI labels, transmission spectra,
+Seebeck coefficients). No published work applies conditional graph diffusion to the
+single-molecule electronics domain. The SME-Agent would be the first to bridge this gap,
+requiring a fundamentally different conditioning and training strategy.
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 4: Agentic AI for Scientific Discovery -->
+<!-- ============================================================ -->
+<div class="section" id="s4">
+<h2>4. Agentic AI for Scientific Discovery</h2>
+
+<div class="summary-box">
+<h4>Domain overview</h4>
+<p>
+Agentic AI — systems that reason, plan, use tools, and pursue goals with some
+autonomy — has rapidly emerged as a paradigm for scientific discovery. Multiple
+frameworks and surveys were published in 2024–2026, covering domains from drug
+discovery to materials science to astronomy. The SME-Agent project sits squarely
+in this emerging paradigm, applying multi-agent principles to the specialized
+domain of single-molecule electronics.
+</p>
+</div>
+
+<h3>Survey and perspective papers</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2508.14111">From AI for Science to Agentic Science: A Survey on Autonomous Scientific Discovery</a></div>
+  <div class="authors">Jiaqi Wei, Yuejin Yang, Xiang Zhang, Yuhan Chen, Xiang Zhuang, Zhangyang Gao, Dongzhan Zhou, Guangshuai Wang, Zhiqiang Gao, Juntai Cao, Zijie Qiu, Ming Hu, Chenglong Ma, Shixiang Tang, Junjun He, Chunfeng Song, Xuming He, Qiang Zhang, Chenyu You, Shuangjia Zheng, Ning Ding, Wanli Ouyang, Nanqing Dong, Yu Cheng, Siqi Sun, Lei Bai, Bowen Zhou</div>
+  <div class="venue">arXiv:2508.14111 (2025)</div>
+  <div class="abstract">
+    <strong>Key survey.</strong> Position Agentic Science as a pivotal stage within AI for Science.
+    Covers the evolution from specialized computational tools to autonomous research
+    partners. The SME-Agent directly implements the agentic science paradigm proposed
+    here, applied to molecular electronics.
+  </div>
+  <div class="tags"><span class="tag">survey</span><span class="tag">agentic science</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2503.08979">Agentic AI for Scientific Discovery: A Survey of Progress, Challenges, and Future Directions</a></div>
+  <div class="authors">Mourad Gridach, Jay Nanavati, Khaldoun Zine El Abidine, Lenon Mendes, Christina Mack</div>
+  <div class="venue">arXiv:2503.08979 (2025)</div>
+  <div class="abstract">
+    Comprehensive survey of agentic AI in scientific discovery. Covers reasoning,
+    planning, autonomous decision-making, literature review, hypothesis generation,
+    and experimental design. Framework-level reference for SME-Agent architecture.
+  </div>
+  <div class="tags"><span class="tag">survey</span><span class="tag">reasoning</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2404.02831">Empowering Biomedical Discovery with AI Agents</a></div>
+  <div class="authors">Shanghua Gao, Ada Fang, Yepeng Huang, Valentina Giunchiglia, Ayush Noori, Jonathan Richard Schwarz, Yasha Ektefaie, Jovana Kondic, Marinka Zitnik</div>
+  <div class="venue">arXiv:2404.02831 (2024)</div>
+  <div class="abstract">
+    Envisions "AI scientists" as systems capable of skeptical learning and reasoning
+    for biomedical research. Proposes collaborative agents integrating AI models with
+    experimental platforms. Conceptual foundation for multi-agent discovery systems.
+  </div>
+  <div class="tags"><span class="tag">AI scientists</span><span class="tag">biomedical</span><span class="tag">2024</span></div>
+</div>
+
+<h3>Implementation frameworks</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2510.26887">The Denario project: Deep knowledge AI agents for scientific discovery</a></div>
+  <div class="authors">Francisco Villaescusa-Navarro et al.</div>
+  <div class="venue">arXiv:2510.26887 (2025)</div>
+  <div class="abstract">
+    <strong>Very relevant.</strong> Denario is a multi-agent system for scientific research:
+    generating ideas, checking literature, developing plans, writing and executing code.
+    Demonstrates the feasibility of multi-agent scientific workflows — directly analogous
+    to SME-Agent's Literature, Hypothesis, and Critic agents.
+  </div>
+  <div class="tags"><span class="tag">multi-agent</span><span class="tag">scientific assistant</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2504.08066">The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search</a></div>
+  <div class="authors">Yutaro Yamada, Robert Tjarko Lange, Cong Lu, Shengran Hu, Chris Lu, Jakob Foerster, Jeff Clune, David Ha</div>
+  <div class="venue">arXiv:2504.08066 (2025)</div>
+  <div class="abstract">
+    End-to-end agentic system that produced the first entirely AI-generated
+    peer-review-accepted workshop paper. Demonstrates that agentic systems can
+    navigate the full research workflow from idea to paper.
+  </div>
+  <div class="tags"><span class="tag">end-to-end</span><span class="tag">AI scientist</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2507.16110">Expert-Guided LLM Reasoning for Battery Discovery: From AI-Driven Hypothesis to Synthesis and Characterization</a></div>
+  <div class="authors">Shengchao Liu, Hannan Xu, Yan Ai, Huanxin Li, Yoshua Bengio, Harry Guo</div>
+  <div class="venue">arXiv:2507.16110 (2025)</div>
+  <div class="abstract">
+    <strong>Highly relevant.</strong> Expert-guided LLM reasoning for battery materials discovery.
+    Covers the full pipeline from hypothesis to synthesis to characterization — the
+    closest existing analogue to the SME-Agent architecture, but applied to battery
+    materials rather than molecular electronics.
+  </div>
+  <div class="tags"><span class="tag">hypothesis-driven</span><span class="tag">materials discovery</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2507.09023">Accelerating Drug Discovery Through Agentic AI: A Multi-Agent Approach to Laboratory Automation in the DMTA Cycle</a></div>
+  <div class="authors">Yao Fehlis et al.</div>
+  <div class="venue">arXiv:2507.09023 (2025)</div>
+  <div class="abstract">
+    Multi-agent framework (Tippy) for the design-make-test-analyze (DMTA) cycle
+    in drug discovery. Demonstrates practical agentic automation of laboratory
+    workflows — relevant for the SME-Agent's synthesis-to-experiment pipeline.
+  </div>
+  <div class="tags"><span class="tag">DMTA</span><span class="tag">lab automation</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2601.12542">Rethinking the AI Scientist: Interactive Multi-Agent Workflows for Scientific Discovery</a></div>
+  <div class="authors">Lukas Weidener et al.</div>
+  <div class="venue">arXiv:2601.12542 (2026)</div>
+  <div class="abstract">
+    Interactive multi-agent workflows for real-time scientific discovery.
+    Moves beyond batch-mode agent operation toward interactive collaboration
+    — relevant for the human-in-the-loop aspects of SME-Agent.
+  </div>
+  <div class="tags"><span class="tag">interactive</span><span class="tag">multi-agent</span><span class="tag">2026</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2510.27130">AI Agents in Drug Discovery</a></div>
+  <div class="authors">Srijit Seal et al.</div>
+  <div class="venue">arXiv:2510.27130 (2025)</div>
+  <div class="abstract">
+    Comprehensive overview of AI agents in drug discovery — reasoning, acting,
+    and learning through research workflows. Provides taxonomy and case studies
+    relevant to SME-Agent's multi-agent design.
+  </div>
+  <div class="tags"><span class="tag">drug discovery</span><span class="tag">agents overview</span><span class="tag">2025</span></div>
+</div>
+
+<h3>Critical perspectives</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2605.08956">Agentic AI Scientists Are Not Built For Autonomous Scientific Discovery</a></div>
+  <div class="authors">Harshit Bisht, Vinay Kumar, Kevin Maik Jablonka, Mausam, N. M. Anoop Krishnan</div>
+  <div class="venue">arXiv:2605.08956 (2026)</div>
+  <div class="abstract">
+    <strong>Important cautionary perspective.</strong> Argues that current agentic AI systems are
+    not truly built for autonomous scientific discovery. Suggests they function best
+    as co-scientists rather than fully autonomous researchers. This aligns with the
+    SME-Agent philosophy of a "co-scientist" that generates hypotheses and candidates
+    while humans select, validate, and interpret.
+  </div>
+  <div class="tags"><span class="tag">cautionary</span><span class="tag">co-scientist</span><span class="tag">2026</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2605.27905">AI Research Agents Narrow Scientific Exploration</a></div>
+  <div class="authors">Yixuan Tang, Yi Yang</div>
+  <div class="venue">arXiv:2605.27905 (2026)</div>
+  <div class="abstract">
+    <strong>Important cautionary perspective.</strong> Shows that AI research agents may narrow
+    scientific exploration by converging on well-represented ideas and missing
+    genuinely novel directions. Directly relevant to the SME-Agent Critic Agent,
+    which is designed to counteract exactly this kind of exploration narrowing.
+  </div>
+  <div class="tags"><span class="tag">exploration narrowing</span><span class="tag">cautionary</span><span class="tag">2026</span></div>
+</div>
+
+<div class="gap-box">
+<h4>Gap identified for SME-Agent</h4>
+<p>
+<strong>No existing agentic framework targets single-molecule electronics.</strong>
+Existing agentic science systems focus on drug discovery (Tippy, AI Agents in Drug
+Discovery), battery materials (Expert-Guided LLM Reasoning), general astronomy
+(Denario), or general-purpose AI scientist workflows. <strong>SME-Agent would be the
+first domain-specific agentic framework for quantum-transport molecular design.</strong>
+The positioning aligns with the "co-scientist" philosophy advocated by recent
+cautionary perspectives.
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 5: Uncertainty-Quantified Molecular Property Prediction -->
+<!-- ============================================================ -->
+<div class="section" id="s5">
+<h2>5. Uncertainty-Quantified Molecular Property Prediction</h2>
+
+<div class="summary-box">
+<h4>Domain overview</h4>
+<p>
+Uncertainty quantification (UQ) in molecular property prediction is critical for
+reliable decision-making in active learning and experimental design. Techniques
+include Bayesian neural networks, ensembles, MC dropout, and evidential regression.
+For SME-Agent, UQ is essential for distinguishing genuine molecular signals from
+predictor noise, especially given the small dataset.
+</p>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1903.08375">Uncertainty quantification of molecular property prediction with Bayesian neural networks</a></div>
+  <div class="authors">Seongok Ryu, Yongchan Kwon, Woo Youn Kim</div>
+  <div class="venue">arXiv:1903.08375 (2019)</div>
+  <div class="abstract">
+    Early application of Bayesian NNs to molecular property prediction.
+    Quantifies epistemic and aleatoric uncertainty. Shows that UQ improves
+    decision-making in molecular design.
+  </div>
+  <div class="tags"><span class="tag">Bayesian NN</span><span class="tag">epistemic</span><span class="tag">aleatoric</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1910.03127">Evaluating Scalable Uncertainty Estimation Methods for DNN-Based Molecular Property Prediction</a></div>
+  <div class="authors">Gabriele Scalia, Colin A. Grambow, Barbara Pernici, Yi-Pei Li, William H. Green</div>
+  <div class="venue">arXiv:1910.03127 (2019)</div>
+  <div class="abstract">
+    Systematic evaluation of scalable UQ methods (ensembles, MC dropout, mean-variance
+    estimation) for molecular property prediction. Provides guidance on which UQ
+    methods work best for which molecular property types.
+  </div>
+  <div class="tags"><span class="tag">UQ evaluation</span><span class="tag">ensembles</span><span class="tag">MC dropout</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2005.10036">Uncertainty Quantification Using Neural Networks for Molecular Property Prediction</a></div>
+  <div class="authors">Lior Hirschfeld, Kyle Swanson, Kevin Yang, Regina Barzilay, Connor W. Coley</div>
+  <div class="venue">arXiv:2005.10036 (2020)</div>
+  <div class="abstract">
+    Practical UQ framework for molecular property prediction. Tests ensembling,
+    MC dropout, and evidential regression across multiple datasets. Provides
+    recommendations for UQ in drug discovery settings.
+  </div>
+  <div class="tags"><span class="tag">practical UQ</span><span class="tag">ensembling</span><span class="tag">2020</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2012.02089">Bayesian Graph Neural Networks for Molecular Property Prediction</a></div>
+  <div class="authors">George Lamb, Brooks Paige</div>
+  <div class="venue">arXiv:2012.02089 (2020)</div>
+  <div class="abstract">
+    Bayesian GNNs capturing parameter uncertainty. Shows that Bayesian treatment
+    improves generalization to new scaffolds — directly relevant for SME-Agent's
+    scaffold-split evaluation.
+  </div>
+  <div class="tags"><span class="tag">Bayesian GNN</span><span class="tag">scaffold generalization</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2102.11439">Assigning Confidence to Molecular Property Prediction</a></div>
+  <div class="authors">AkshatKumar Nigam, Robert Pollice, Matthew F. D. Hurley, Riley J. Hickman, Matteo Aldeghi, Naruki Yoshikawa, Seyone Chithrananda, Vincent A. Voelz, Alán Aspuru-Guzik</div>
+  <div class="venue">arXiv:2102.11439 (2021)</div>
+  <div class="abstract">
+    Comprehensive framework for confidence assignment in molecular property prediction.
+    Tests multiple UQ methods across diverse datasets. Important reference for
+    the SME-Agent predictor's confidence calibration.
+  </div>
+  <div class="tags"><span class="tag">confidence</span><span class="tag">calibration</span><span class="tag">2021</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2107.06068">Calibrated Uncertainty for Molecular Property Prediction using Ensembles of Message Passing Neural Networks</a></div>
+  <div class="authors">Jonas Busk, Peter Bjørn Jørgensen, Arghya Bhowmik, Mikkel N. Schmidt, Ole Winther, Tejs Vegge</div>
+  <div class="venue">arXiv:2107.06068 (2021)</div>
+  <div class="abstract">
+    Deep ensemble approach with calibrated uncertainties for molecular properties.
+    Emphasizes calibration quality — not just ranking but accurate probability
+    estimates. Essential for the SME-Agent predictor ensemble design.
+  </div>
+  <div class="tags"><span class="tag">deep ensemble</span><span class="tag">calibration</span><span class="tag">2021</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2307.10438">Uncertainty Quantification for Molecular Property Predictions with Graph Neural Architecture Search</a></div>
+  <div class="authors">Shengli Jiang, Shiyi Qin, Reid C. Van Lehn, Prasanna Balaprakash, Victor M. Zavala</div>
+  <div class="venue">arXiv:2307.10438 (2023)</div>
+  <div class="abstract">
+    Neural architecture search for UQ in GNNs. Automatically finds GNN architectures
+    that produce well-calibrated uncertainties. Relevant for optimizing the
+    SME-Agent predictor ensemble architecture.
+  </div>
+  <div class="tags"><span class="tag">NAS</span><span class="tag">GNN</span><span class="tag">2023</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1703.01685">Reliable estimation of prediction uncertainty for physico-chemical property models</a></div>
+  <div class="authors">Jonny Proppe, Markus Reiher</div>
+  <div class="venue">arXiv:1703.01685 (2017)</div>
+  <div class="abstract">
+    Systematic discussion of uncertainty estimation for chemistry property models.
+    Addresses systematic errors, reference data inconsistency, and model assumptions.
+    Theoretical foundation for UQ in SME-Agent.
+  </div>
+  <div class="tags"><span class="tag">phys-chem</span><span class="tag">systematic error</span><span class="tag">2017</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2504.02606">Improving Counterfactual Truthfulness for Molecular Property Prediction through Uncertainty Quantification</a></div>
+  <div class="authors">Jonas Teufel, Annika Leinweber, Pascal Friederich</div>
+  <div class="venue">arXiv:2504.02606 (2025)</div>
+  <div class="abstract">
+    Links UQ with counterfactual explanations for molecular property prediction.
+    Demonstrates how UQ improves interpretability and trust — relevant for
+    the SME-Agent's auditable reasoning trail requirements.
+  </div>
+  <div class="tags"><span class="tag">counterfactual</span><span class="tag">explainability</span><span class="tag">2025</span></div>
+</div>
+
+<div class="gap-box">
+<h4>Gap identified for SME-Agent</h4>
+<p>
+<strong>UQ methods have been validated mainly on drug-discovery datasets and computational
+chemistry benchmarks (QM9, PCBA, etc.).</strong> No systematic evaluation exists for UQ
+in single-molecule transport property prediction, where the chemical space is
+smaller, more specialized, and the property landscape is governed by quantum
+interference rather than biochemical interactions. <strong>SME-Agent requires
+domain-specific UQ calibration for transport-relevant molecular features.</strong>
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 6: Retrosynthesis, Synthetic Accessibility & Active Learning -->
+<!-- ============================================================ -->
+<div class="section" id="s6">
+<h2>6. Retrosynthesis, Synthetic Accessibility &amp; Active Learning</h2>
+
+<div class="summary-box">
+<h4>Domain overview</h4>
+<p>
+Synthetic accessibility scoring (SAscore, RAscore) and retrosynthesis planning
+(AiZynthFinder, CASP) are essential filters between molecule generation and
+experimental validation. Active learning (AL) connects computational screening
+to experimental feedback. For SME-Agent, these ensure that beautiful but
+unsynthesizable molecules do not dominate the discovery pipeline.
+</p>
+</div>
+
+<h3>Retrosynthesis and synthetic accessibility</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2507.02752">SynTwins: A Retrosynthesis-Guided Framework for Synthesizable Molecular Analog Generation</a></div>
+  <div class="authors">Shuan Chen, Gunwook Nam, Alan Aspuru-Guzik, Yousung Jung</div>
+  <div class="venue">arXiv:2507.02752 (2025)</div>
+  <div class="abstract">
+    <strong>Highly relevant.</strong> Directly addresses the gap between AI-generated molecules and
+    synthetic feasibility. Retrosynthesis-guided analog generation — explicitly
+    designs molecules with known synthetic routes. Closely aligned with the
+    SME-Agent Synthesis Agent concept.
+  </div>
+  <div class="tags"><span class="tag">retrosynthesis-guided</span><span class="tag">synthesizable</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2411.19503">Hierarchical Framework for Retrosynthesis Prediction with Enhanced Reaction Center Localization</a></div>
+  <div class="authors">Seongeun Yun, Won Bo Lee</div>
+  <div class="venue">arXiv:2411.19503 (2024)</div>
+  <div class="abstract">
+    Hierarchical retrosynthesis prediction with improved reaction center localization.
+    Technical approach for the retrosynthesis component of the Synthesis Agent.
+  </div>
+  <div class="tags"><span class="tag">retrosynthesis</span><span class="tag">reaction center</span><span class="tag">2024</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2408.10285">BatGPT-Chem: A Foundation Large Model For Retrosynthesis Prediction</a></div>
+  <div class="authors">Yifei Yang et al.</div>
+  <div class="venue">arXiv:2408.10285 (2024)</div>
+  <div class="abstract">
+    Large foundation model for retrosynthesis prediction. Demonstrates that
+    large-scale pre-training improves retrosynthesis planning — relevant for
+    the SME-Agent's retrosynthesis tool selection.
+  </div>
+  <div class="tags"><span class="tag">foundation model</span><span class="tag">retrosynthesis</span><span class="tag">2024</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2412.05269">Chemist-aligned retrosynthesis by ensembling diverse inductive bias models</a></div>
+  <div class="authors">Krzysztof Maziarz et al. (including Marwin Segler)</div>
+  <div class="venue">arXiv:2412.05269 (2024)</div>
+  <div class="abstract">
+    Ensemble of diverse models for chemist-aligned retrosynthesis. Addresses the
+    gap between AI synthesis planning and what chemists consider reasonable routes.
+  </div>
+  <div class="tags"><span class="tag">chemist-aligned</span><span class="tag">ensemble</span><span class="tag">2024</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2512.07079">Procrustean Bed for AI-Driven Retrosynthesis: A Unified Framework for Reproducible Evaluation</a></div>
+  <div class="authors">Anton Morgunov, Victor S. Batista</div>
+  <div class="venue">arXiv:2512.07079 (2025)</div>
+  <div class="abstract">
+    RetroCast: unified evaluation framework for retrosynthesis models. Addresses
+    standardization gaps — relevant for establishing the SME-Agent retrosynthesis
+    evaluation protocol.
+  </div>
+  <div class="tags"><span class="tag">evaluation</span><span class="tag">standardization</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2501.08001">GDiffRetro: Retrosynthesis Prediction with Dual Graph Enhanced Molecular Representation and Diffusion Generation</a></div>
+  <div class="authors">Shengyin Sun et al.</div>
+  <div class="venue">arXiv:2501.08001 (2025)</div>
+  <div class="abstract">
+    Diffusion-based retrosynthesis prediction. Graph-enhanced molecular representation
+    for retrosynthesis — connects the graph diffusion and retrosynthesis themes.
+  </div>
+  <div class="tags"><span class="tag">diffusion retrosynthesis</span><span class="tag">2025</span></div>
+</div>
+
+<h3>Active learning for molecular discovery</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1709.07082">Machine learning of molecular properties: locality and active learning</a></div>
+  <div class="authors">Konstantin Gubaev, Evgeny V. Podryabinkin, Alexander V. Shapeev</div>
+  <div class="venue">arXiv:1709.07082 (2017)</div>
+  <div class="abstract">
+    Active learning for molecular property prediction, exploiting locality in
+    chemical space. Demonstrates that AL significantly reduces the number of
+    DFT calculations needed. Direct foundation for SME-Agent's AL workflow.
+  </div>
+  <div class="tags"><span class="tag">active learning</span><span class="tag">locality</span><span class="tag">DFT reduction</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2111.15258">DeepAL: Deep Active Learning in Python</a></div>
+  <div class="authors">Kuan-Hao Huang</div>
+  <div class="venue">arXiv:2111.15258 (2021)</div>
+  <div class="abstract">
+    Python library implementing common deep active learning strategies.
+    Practical tool for the AL component of SME-Agent's active learning loop.
+  </div>
+  <div class="tags"><span class="tag">library</span><span class="tag">Python</span><span class="tag">2021</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2401.05568">Phase discovery with active learning: Application to structural phase transitions in equiatomic NiTi</a></div>
+  <div class="authors">Jonathan Vandermause et al.</div>
+  <div class="venue">arXiv:2401.05568 (2024)</div>
+  <div class="abstract">
+    AL for materials phase discovery, combining MD with Bayesian query strategies.
+    Demonstrates AL-guided exploration in materials science — relevant analogue
+    for SME-Agent's DFT-guided active learning.
+  </div>
+  <div class="tags"><span class="tag">phase discovery</span><span class="tag">materials AL</span><span class="tag">2024</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2412.05948">Accelerating the Discovery of Materials with Expected Thermal Conductivity via a Synergistic Strategy of DFT and Interpretable Deep Learning</a></div>
+  <div class="authors">Yuxuan Zeng et al.</div>
+  <div class="venue">arXiv:2412.05948 (2024)</div>
+  <div class="abstract">
+    DFT + interpretable deep learning for materials discovery. Synergistic strategy
+    combining computation and ML — relevant analogue for SME-Agent's DFT+NEGF +
+    ML pipeline.
+  </div>
+  <div class="tags"><span class="tag">DFT+ML</span><span class="tag">materials discovery</span><span class="tag">2024</span></div>
+</div>
+
+<div class="gap-box">
+<h4>Gap identified for SME-Agent</h4>
+<p>
+<strong>Existing retrosynthesis and synthetic accessibility tools are not optimized for
+single-molecule electronics requirements.</strong> Specifically, they do not account for
+anchor-group compatibility, electrochemical stability under STM junction conditions,
+or synthesis of molecules designed for specific QI behavior. <strong>SME-Agent's
+Synthesis Agent must adapt these general-purpose tools to the unique constraints
+of molecular junction synthesis.</strong>
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 7: Cross-Cutting Analysis & Project Positioning -->
+<!-- ============================================================ -->
+<div class="section" id="s7">
+<h2>7. Cross-Cutting Analysis &amp; Project Positioning</h2>
+
+<div class="summary-box">
+<h4>Synthesis: Where SME-Agent fits in the landscape</h4>
+<p>
+This survey reveals a clear gap at the intersection of three domains —
+<strong>single-molecule electronics / quantum interference</strong>,
+<strong>conditional graph diffusion for molecular generation</strong>, and
+<strong>agentic AI for scientific discovery</strong> — where no existing work
+provides an integrated solution. Below we summarize the competitive landscape
+and the SME-Agent innovation opportunity.
+</p>
+</div>
+
+<h3>Comparative positioning</h3>
+
+<table>
+  <tr>
+    <th>System / Approach</th>
+    <th>Domain</th>
+    <th>Gen. model</th>
+    <th>Uncertainty</th>
+    <th>Agentic?</th>
+    <th>QI focus?</th>
+    <th>Exp. val?</th>
+  </tr>
+  <tr>
+    <td><strong>SMEGen (legacy, 2024)</strong></td>
+    <td>SME</td>
+    <td>LSTM</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>3 mol</td>
+  </tr>
+  <tr>
+    <td><strong>SME-Agent (target)</strong></td>
+    <td>SME</td>
+    <td>Graph diffusion</td>
+    <td>Yes (ensemble)</td>
+    <td>Yes (6 agents)</td>
+    <td>Yes (explicit hypotheses)</td>
+    <td>8-15 mol</td>
+  </tr>
+  <tr>
+    <td>Denario (2025)</td>
+    <td>General science</td>
+    <td>N/A (literature)</td>
+    <td>No</td>
+    <td>Yes (multi-agent)</td>
+    <td>No</td>
+    <td>Astronomy</td>
+  </tr>
+  <tr>
+    <td>AI Scientist-v2 (2025)</td>
+    <td>General ML</td>
+    <td>N/A (code)</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Workshop paper</td>
+  </tr>
+  <tr>
+    <td>Expert-Guided LLM (2025)</td>
+    <td>Battery materials</td>
+    <td>N/A (literature)</td>
+    <td>No</td>
+    <td>Partial</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>Tippy (2025)</td>
+    <td>Drug discovery</td>
+    <td>Various</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Lab automation</td>
+  </tr>
+  <tr>
+    <td>Graph Diff. Transformers (2024)</td>
+    <td>General molecules</td>
+    <td>Diffusion TF</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>Conditional Graph Diff. (2023)</td>
+    <td>Drug discovery</td>
+    <td>Discrete diff.</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>Lambert group QI design (2015-23)</td>
+    <td>SME</td>
+    <td>N/A (expert rules)</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>Hong group EC-STMBJ (2015-24)</td>
+    <td>SME</td>
+    <td>N/A</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+<h3>Innovation dimensions</h3>
+
+<div class="card">
+  <div class="title">1. Domain-specific agentic architecture for molecular electronics</div>
+  <div class="abstract">
+    No existing agentic framework targets single-molecule electronics. SME-Agent's
+    six-agent architecture (Literature, Hypothesis, Generative Design, Quantum-Transport,
+    Synthesis, Critic) is designed specifically for the SME discovery workflow.
+  </div>
+</div>
+
+<div class="card">
+  <div class="title">2. Hypothesis-driven generation, not black-box optimization</div>
+  <div class="abstract">
+    Unlike standard generative models that maximize a scalar property score,
+    SME-Agent generates molecules to test explicit quantum-transport hypotheses.
+    This shifts the evaluation from "property value" to "hypothesis confirmation
+    value" — a fundamentally different discovery paradigm.
+  </div>
+</div>
+
+<div class="card">
+  <div class="title">3. Quantum-transport conditioning for molecular generation</div>
+  <div class="abstract">
+    No existing generative model conditions on DQI labels, transmission spectra,
+    Seebeck coefficients, or regulation range. This requires new training data,
+    new conditioning architectures, and new evaluation metrics.
+  </div>
+</div>
+
+<div class="card">
+  <div class="title">4. Uncertainty-aware prediction in a sparse, high-value domain</div>
+  <div class="abstract">
+    The SME-Agent predictor ensemble with explicit uncertainty quantification is
+    designed for a domain where DFT calculations are expensive ($50-150 molecules
+    per round) and experimental validation is even more costly. Every decision
+    must account for confidence.
+  </div>
+</div>
+
+<div class="card">
+  <div class="title">5. Matched-budget comparison with baselines</div>
+  <div class="abstract">
+    The benchmark plan includes 6 generators (agentic, graph diffusion, REINVENT4,
+    LSTM, expert rules, random) compared under matched DFT+NEGF budgets — a rigor
+    standard that most molecular discovery papers do not meet.
+  </div>
+</div>
+
+<div class="card">
+  <div class="title">6. Built-in critique and reviewer protection</div>
+  <div class="abstract">
+    The Critic Agent explicitly protects against overclaiming, train/test leakage,
+    cherry-picking, and known-QI-rule rediscovery. This is a novel architectural
+    component not found in any existing molecular discovery system.
+  </div>
+</div>
+
+<h3>Key papers to cite in the SME-Agent manuscript</h3>
+
+<table>
+  <tr><th>Category</th><th>Paper</th><th>Why</th></tr>
+  <tr><td>Foundation (theory)</td><td>Lambert (2016) — Basic concepts in SME</td><td>Transport formalism</td></tr>
+  <tr><td>Foundation (QI rules)</td><td>Lambert &amp; Liu (2017) — Magic Ratio Rule</td><td>Expert design rules to benchmark against</td></tr>
+  <tr><td>Foundation (experiment)</td><td>Geng et al. (2015) — Magic ratios MRR</td><td>Experimental validation paradigm</td></tr>
+  <tr><td>Domain (heteroatom QI)</td><td>Sangtarash et al. (2016) — Heteroatom QI</td><td>Design rules for QI control</td></tr>
+  <tr><td>Domain (gating)</td><td>Li et al. (2018) — Gate controlled QI</td><td>Gate response reference</td></tr>
+  <tr><td>Domain (thermoelectric)</td><td>García-Suarez et al. (2015)</td><td>Seebeck-QI connection</td></tr>
+  <tr><td>Domain (DQI classification)</td><td>Krieger et al. (2025) — DQI classification</td><td>State-of-the-art DQI taxonomy</td></tr>
+  <tr><td>AI (graph diffusion)</td><td>Liu et al. (2024) — Graph Diff. Transformers</td><td>Closest related generative model</td></tr>
+  <tr><td>AI (UQ)</td><td>Busk et al. (2021) — Calibrated UQ ensembles</td><td>Predictor design</td></tr>
+  <tr><td>AI (retrosynthesis)</td><td>Chen et al. (2025) — SynTwins</td><td>Synthesis-guided generation</td></tr>
+  <tr><td>AI (active learning)</td><td>Gubaev et al. (2017) — Active learning for mol.</td><td>AL loop design</td></tr>
+  <tr><td>Agentic (survey)</td><td>Wei et al. (2025) — From AI for Science to Agentic Science</td><td>Paradigm positioning</td></tr>
+  <tr><td>Agentic (cautionary)</td><td>Bisht et al. (2026) — AI not for autonomous disc.</td><td>Co-scientist philosophy</td></tr>
+  <tr><td>Agentic (cautionary)</td><td>Tang &amp; Yang (2026) — Exploration narrowing</td><td>Critic Agent motivation</td></tr>
+  <tr><td>Agentic (implementation)</td><td>Liu et al. (2025) — Expert-Guided LLM for batteries</td><td>Closest multi-agent analogue</td></tr>
+  <tr><td>Agentic (implementation)</td><td>Fehlis et al. (2025) — Tippy DMTA</td><td>Multi-agent lab automation</td></tr>
+  <tr><td>AI (many-body QI)</td><td>Sen &amp; Mitchell (2023) — Two-channel Kondo via QI</td><td>Advanced QI physics for novelty</td></tr>
+  <tr><td>ML (BJ data)</td><td>Hamill et al. (2024) — Change point detection</td><td>Automated data analysis</td></tr>
+</table>
+
+<h3>SME-Agent's unique claims-in-waiting</h3>
+
+<div class="summary-box">
+<h4>Claims that can be made post-validation</h4>
+<ol style="margin-left:1.25rem;font-size:0.85rem;">
+  <li><strong>First agentic discovery framework for single-molecule electronics</strong> — no existing system combines literature mining, hypothesis generation, QI-conditioned design, DFT+NEGF validation, retrosynthesis filtering, and critic review.</li>
+  <li><strong>First conditional graph diffusion model for quantum-transport properties</strong> — no existing generative model conditions on DQI labels, transmission features, or Seebeck coefficients.</li>
+  <li><strong>Systematic comparison of 6 generation strategies under matched DFT budgets</strong> — most papers compare only 2-3 methods; SME-Agent benchmarks agentic, graph diffusion, REINVENT4, LSTM, expert rules, and random baselines.</li>
+  <li><strong>Prospective experimental validation with positive, negative, and control molecules</strong> — the legacy validation of 3 molecules is expanded to 8-15 molecules with proper controls.</li>
+  <li><strong>Demonstration that hypothesis-guided generation outperforms property-maximizing generation</strong> — the core scientific claim distinguishing SME-Agent from conventional closed-loop optimization.</li>
+</ol>
+</div>
+
+<div class="gap-box">
+<h4>Key risks and open questions</h4>
+<ol style="margin-left:1.25rem;font-size:0.85rem;">
+  <li><strong>Small dataset problem:</strong> The SME dataset (~171 Tier A molecules) is extremely small by ML standards. Transfer learning, pre-training, or data augmentation strategies are likely needed.</li>
+  <li><strong>DFT-NEGF bottleneck:</strong> Even with surrogate filtering, DFT+NEGF validation for 50-150 molecules per round is computationally expensive. Need to ensure the quantum-transport agent is efficient.</li>
+  <li><strong>Hypothesis agent quality:</strong> LLM-generated quantum-transport hypotheses may be plausible-sounding but physically wrong. The scoring function (novelty, plausibility, testability) must be robust.</li>
+  <li><strong>Synthetic feasibility for novel scaffolds:</strong> The most interesting AI-discovered molecules may be the hardest to synthesize. The Synthesis Agent must balance novelty with practicality.</li>
+  <li><strong>Experimental bandwidth:</strong> EC-STMBJ characterization of 8-15 molecules requires significant experimental resources. The validation plan must be realistic about throughput.</li>
+  <li><strong>Risk of rediscovery:</strong> The biggest scientific risk is that the "AI-discovered" molecules are actually just re-expressions of known magic-ratio rule molecules. The Critic Agent's novelty analysis is essential.</li>
+</ol>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- Footer -->
+<!-- ============================================================ -->
+<footer>
+  <p>SME-Agent Project &mdash; Comprehensive Literature Survey &mdash; 2026-06-08</p>
+  <p>Base: arXiv API. Generated from 6 search domains, ~170 papers reviewed, 92 cited.</p>
+  <p>Next steps: Expand with Semantic Scholar citations, Google Scholar, and domain-specific journal databases.</p>
+</footer>
+
+</div>
+</body>
+</html>

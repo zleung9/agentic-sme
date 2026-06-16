@@ -97,7 +97,11 @@ python scripts/run_benchmarks.py --generator random_enum --n 10000
 |---|---|
 | [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | Full project specification, architecture, dataset strategy, agent instructions |
 | [`.claude/MEMORY.md`](.claude/MEMORY.md) | Project history, source documents, 3-month research plan |
-| [`docs/literature-survey.html`](docs/literature-survey.html) | Domain literature survey |
+| [`docs/data_reference.md`](docs/data_reference.md) | Comprehensive inventory of all datasets, file locations, statistics, and cross-references |
+| [`docs/dataset_protocol.md`](docs/dataset_protocol.md) | SMEMol dataset construction, standardization, splitting, and versioning protocol |
+| [`docs/dataset_audit.md`](docs/dataset_audit.md) | Data quality audit report |
+| [`docs/legacy_data_inventory.md`](docs/legacy_data_inventory.md) | Legacy SMEGen data inventory with source paths and summary statistics |
+| [`docs/literature-survey.html`](docs/literature-survey.html) | Domain literature survey (SME physics & chemistry) |
 | [`docs/literature-survey-ai-sme.html`](docs/literature-survey-ai-sme.html) | AI-for-SME literature survey |
 
 ---

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SME-Agent: AI-on-SME Literature Survey (2024–2026)</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #c9d1d9; --text-muted: #8b949e; --accent: #58a6ff;
+    --accent-alt: #3fb950; --warn: #d29922; --danger: #f85149;
+    --code-bg: #1c2128;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 14px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem; }
+
+  header { border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 2rem; }
+  header h1 { font-size: 1.5rem; color: var(--accent); margin-bottom: 0.25rem; }
+  header .subtitle { font-size: 0.9rem; color: var(--accent-alt); margin-bottom: 0.25rem; }
+  header .meta { color: var(--text-muted); font-size: 0.85rem; }
+  header .meta span { margin-right: 1.5rem; }
+
+  .section { margin-bottom: 2.5rem; }
+  .section h2 { font-size: 1.15rem; color: var(--accent-alt); border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin-bottom: 1rem; }
+  .section h3 { font-size: 1rem; color: var(--accent); margin: 1.2rem 0 0.5rem; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+  .card .title { font-weight: 600; color: var(--text); }
+  .card .title a { color: var(--accent); text-decoration: none; }
+  .card .title a:hover { text-decoration: underline; }
+  .card .authors { font-size: 0.82rem; color: var(--text-muted); margin: 0.15rem 0; }
+  .card .venue { font-size: 0.78rem; color: var(--warn); }
+  .card .relevance { font-size: 0.78rem; color: var(--accent-alt); font-weight: 600; }
+  .card .abstract { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem; line-height: 1.5; }
+  .card .tags { margin-top: 0.35rem; }
+  .card .tag { display: inline-block; padding: 0.1em 0.5em; border-radius: 8px; font-size: 0.7rem; font-weight: 600; margin-right: 0.35rem; background: #1a2233; color: var(--accent); }
+  .card .tag-red { background: #2a1a1a; color: var(--danger); }
+  .card .tag-green { background: #1a2a1a; color: var(--accent-alt); }
+  .card .tag-yellow { background: #2a2a1a; color: var(--warn); }
+
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 2rem; }
+  .toc h2 { font-size: 1rem; color: var(--accent); margin-bottom: 0.75rem; }
+  .toc ol { list-style: none; padding: 0; }
+  .toc li { margin-bottom: 0.3rem; font-size: 0.85rem; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .summary-box { background: #1a2a1a; border: 1px solid var(--accent-alt); border-radius: 6px; padding: 0.75rem 1rem; margin: 0.75rem 0; }
+  .summary-box h4 { color: var(--accent-alt); font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .summary-box p, .summary-box li { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+
+  .gap-box { background: #2a1a1a; border: 1px solid var(--danger); border-radius: 6px; padding: 0.75rem 1rem; margin: 0.75rem 0; }
+  .gap-box h4 { color: var(--danger); font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .gap-box p { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 0.75rem 0; }
+  th, td { padding: 0.4rem 0.6rem; text-align: left; border: 1px solid var(--border); }
+  th { background: var(--surface); color: var(--accent); font-weight: 600; }
+
+  .positioning-box { background: #1a1a2a; border: 1px solid var(--accent); border-radius: 6px; padding: 0.75rem 1rem; margin: 0.75rem 0; }
+  .positioning-box h4 { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .positioning-box li { font-size: 0.85rem; line-height: 1.5; }
+
+  footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; text-align: center; }
+
+  @media (max-width: 700px) { .container { padding: 1rem; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>AI for Single-Molecule Electronics: Focused Literature Survey (2024–2026)</h1>
+  <div class="subtitle">SME-Agent Project &mdash; Searching specifically for AI/ML methods applied to single-molecule electronics and quantum transport</div>
+  <div class="meta">
+    <span>2026-06-08</span>
+    <span>arXiv-based, author-targeted searches</span>
+  </div>
+</header>
+
+<div class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#summary">Executive Summary: The AI-on-SME Landscape</a></li>
+    <li><a href="#s1">1. Deep-Learning-Accelerated Quantum Transport (DeePTB-NEGF)</a></li>
+    <li><a href="#s2">2. ML for Break-Junction Data Analysis</a></li>
+    <li><a href="#s3">3. ML for Molecular Adsorption &amp; Surface Chemistry</a></li>
+    <li><a href="#s4">4. General Quantum Transport + ML (non-SME-specific)</a></li>
+    <li><a href="#s5">5. Closest Analogues: ML for Molecular Electronics (pre-2024)</a></li>
+    <li><a href="#s6">6. Critical Gap Analysis &amp; SME-Agent Positioning</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<!-- Executive Summary -->
+<!-- ============================================================ -->
+<div class="section" id="summary">
+<h2>Executive Summary: The AI-on-SME Landscape</h2>
+
+<div class="summary-box">
+<h4>Key finding</h4>
+<p>
+The intersection of AI/ML and single-molecule electronics is surprisingly sparse
+for 2024–2026. After systematic searches across multiple query strategies,
+<strong>only one publication directly applies deep learning to molecular junction
+quantum transport simulation</strong> (DeePTB-NEGF, Zou et al., 2024).
+No publications were found that apply generative AI, graph neural networks,
+or agentic systems to molecular discovery for single-molecule electronics
+in this period.
+</p>
+</div>
+
+<div class="positioning-box">
+<h4>Implication for SME-Agent</h4>
+<p>
+This near-absence of AI-on-SME work means <strong>SME-Agent occupies a nearly
+empty niche</strong>. The key competitive landscape is not other AI systems,
+but rather:
+</p>
+<ol style="margin-left:1.25rem;font-size:0.85rem;">
+  <li><strong>Expert-rule-based molecular design</strong> (Lambert group MRR, Sangtarash heteroatom rules) — heuristic but well-established</li>
+  <li><strong>Conventional DFT+NEGF screening</strong> — computationally expensive but direct</li>
+  <li><strong>Generic molecular AI methods</strong> (drug-discovery-oriented) — would need heavy adaptation to SME domain</li>
+  <li><strong>DeePTB-NEGF</strong> (2024) — accelerates transport <em>simulation</em> but does <em>not</em> address molecular <em>generation</em> or <em>hypothesis-driven discovery</em></li>
+</ol>
+<p>
+SME-Agent's innovation is <strong>not</strong> competing with an existing crowded
+field — it is <strong>creating</strong> a new field at the intersection of
+agentic AI and single-molecule electronics. This is both an opportunity (first-mover)
+and a risk (the approach is unproven in this domain).
+</p>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 1: DeePTB-NEGF -->
+<!-- ============================================================ -->
+<div class="section" id="s1">
+<h2>1. Deep-Learning-Accelerated Quantum Transport (DeePTB-NEGF)</h2>
+
+<h3>Core work (2024–2025)</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2411.08800">Deep Learning Accelerated Quantum Transport Simulations in Nanoelectronics: From Break Junctions to Field-Effect Transistors</a></div>
+  <div class="authors">Jijie Zou, Zhanghao Zhouyin, Dongying Lin, Yike Huang, Linfeng Zhang, Shimin Hou, Qiangqiang Gu</div>
+  <div class="venue">arXiv:2411.08800v3 (Nov 2024, updated Jun 2025)</div>
+  <div class="relevance">★★★★★ — The single most relevant AI-on-SME work from 2024+</div>
+  <div class="abstract">
+    <strong>DeePTB-NEGF</strong> — an integrated framework combining deep learning tight-binding
+    Hamiltonian prediction with NEGF methodology. Key achievements:<br>
+    • Predicts tight-binding Hamiltonians from geometry via deep neural networks<br>
+    • 2-3 orders of magnitude acceleration over DFT+NEGF<br>
+    • Demonstrated on break junction simulations with &gt;10⁴ snapshots, matching experimental
+    conductance histograms<br>
+    • Scaled to 41nm CNT-FET (~8,000 atoms, 3×10⁴ orbitals) and 180nm CNT (~3×10⁴ atoms, 10⁵ orbitals)<br>
+    • Systematic geometry variation studies confirm need for realistic experimental structures
+  </div>
+  <div class="tags">
+    <span class="tag tag-green">transport simulation</span>
+    <span class="tag tag-green">tight-binding</span>
+    <span class="tag tag-green">NEGF</span>
+    <span class="tag">2024</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2512.11291">Deep Learning-Based Quantum Transport Simulations in Two-Dimensional Materials</a></div>
+  <div class="authors">Jijie Zou, Zhanghao Zhouyin, Qiangqiang Gu, Shishir Kumar Pandey</div>
+  <div class="venue">arXiv:2512.11291v3 (Dec 2025, updated Jun 2026)</div>
+  <div class="relevance">★★★★☆ — Extension of DeePTB to 2D materials; same methodology</div>
+  <div class="abstract">
+    Extends the DeePTB-NEGF framework to 2D material devices. Uses deep learning to predict
+    tight-binding Hamiltonians for 2D material-based nanoelectronics, enabling efficient
+    quantum transport simulations at experimental device scales.
+  </div>
+  <div class="tags"><span class="tag tag-green">2D materials</span><span class="tag tag-green">transport simulation</span><span class="tag">2025</span></div>
+</div>
+
+<h3>Previous DeePTB-related work</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2310.15314">Combining linear-scaling quantum transport and machine-learning molecular dynamics to study thermal and electronic transports in complex materials</a></div>
+  <div class="authors">Zheyong Fan, Yang Xiao, Yanzhou Wang, Penghua Ying, Shunda Chen, Haikuan Dong</div>
+  <div class="venue">arXiv:2310.15314 (2023)</div>
+  <div class="abstract">
+    ML-based neuroevolution potential combined with linear-scaling quantum transport (NEGF-DFT).
+    Predicts thermal and electronic transport simultaneously. Relevant as precursor to the
+    DeePTB approach, but focused on bulk/complex materials rather than molecular junctions.
+  </div>
+  <div class="tags"><span class="tag">neuroevolution potential</span><span class="tag">2023</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2108.01057">Deep learning of deformation-dependent conductance in thin films: nanobubbles in graphene</a></div>
+  <div class="authors">Jack G. Nedell, Jonah Spector, Adel Abbout, Michael Vogl, Gregory A. Fiete</div>
+  <div class="venue">arXiv:2108.01057 (2021)</div>
+  <div class="abstract">
+    CNN approach predicting transport properties from deformation height maps. Focus on
+    graphene nanobubbles rather than molecular junctions, but shares the idea of using
+    deep learning to bypass expensive transport calculations.
+  </div>
+  <div class="tags"><span class="tag">CNN</span><span class="tag">deformation-conductance</span><span class="tag">2021</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/1912.03296">Rapid Exploration of Topological Band Structures using Deep Learning</a></div>
+  <div class="authors">Vittorio Peano, Florian Sapper, Florian Marquardt</div>
+  <div class="venue">arXiv:1912.03296 (2019)</div>
+  <div class="abstract">
+    Deep learning for rapid exploration of topological band structures in periodic
+    nanostructures. Different domain (topological photonics/phononics) but methodologically
+    related to the idea of learning transport-relevant features from structure.
+  </div>
+  <div class="tags"><span class="tag">topological bands</span><span class="tag">2019</span></div>
+</div>
+
+<div class="summary-box">
+<h4>Relationship to SME-Agent</h4>
+<p>
+DeePTB-NEGF is the closest existing AI-on-SME work. It accelerates the
+<strong>simulation</strong> step but does not address <strong>molecular generation</strong>,
+<strong>hypothesis formulation</strong>, or <strong>agentic discovery</strong>.
+SME-Agent's Quantum-Transport Agent could potentially <strong>use DeePTB-NEGF as
+one of its multi-fidelity simulation tools</strong> for rapid initial screening
+before full DFT+NEGF. However, DeePTB-NEGF requires training on DFT data for each
+system type — a non-trivial integration challenge.
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 2: ML for Break Junction Data Analysis -->
+<!-- ============================================================ -->
+<div class="section" id="s2">
+<h2>2. ML for Break-Junction Data Analysis</h2>
+
+<h3>2024+ works</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2506.09608">Identifying Clean and Contaminated Atomic-Sized Gold Contacts under Ambient Conditions Using a Clustering Algorithm</a></div>
+  <div class="authors">Guillem Pellicer, Carlos Sabater</div>
+  <div class="venue">arXiv:2506.09608 (Jun 2025)</div>
+  <div class="relevance">★★★☆☆ — ML for classifying break junction data quality</div>
+  <div class="abstract">
+    Uses clustering algorithms to identify clean vs contaminated gold contacts from
+    break junction measurements under ambient conditions. Relevant for automated quality
+    control in the experimental EC-STMBJ pipeline. Not directly about molecular junctions
+    (focuses on bare gold contacts) but addresses a practical experimental challenge.
+  </div>
+  <div class="tags"><span class="tag tag-yellow">clustering</span><span class="tag tag-yellow">contact quality</span><span class="tag">2025</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2401.12769">Improving single-molecule conductance measurements with change point detection from the econometrics toolbox</a></div>
+  <div class="authors">Joseph M. Hamill, William Bro-Jørgensen, Zoltán Balogh, Haixing Li, Susanne Leitherer, David Solomon, András Halbritter, Gemma Solomon</div>
+  <div class="venue">arXiv:2401.12769 (Jan 2024)</div>
+  <div class="relevance">★★★★☆ — Applied ML method for SM BJ data analysis</div>
+  <div class="abstract">
+    Applies change point detection (from econometrics) to break junction conductance traces.
+    Detects structural breaks in conductance vs displacement data corresponding to molecular
+    junction formation, evolution, and rupture. Provides automated, statistically rigorous
+    analysis pipeline. Directly relevant to the SME-Agent experimental module's data
+    processing needs.
+  </div>
+  <div class="tags">
+    <span class="tag tag-green">change point detection</span>
+    <span class="tag tag-green">automated analysis</span>
+    <span class="tag">2024</span>
+  </div>
+</div>
+
+<h3>Pre-2024 foundational works</h3>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2004.10731">Unsupervised Segmentation-Based Machine Learning as an Advanced Analysis Tool for Single Molecule Break Junction Data</a></div>
+  <div class="authors">Nathan D. Bamberger, Jeffrey A. Ivie, Keshaba N. Parida, Dominic V. McGrath, Oliver L. A. Monti</div>
+  <div class="venue">arXiv:2004.10731 (2020)</div>
+  <div class="abstract">
+    Segmentation-based ML for automated analysis of break junction conductance traces.
+    Demonstrates robust feature extraction from large stochastic datasets without human
+    bias. Important methodological reference for the SME-Agent experimental data pipeline.
+  </div>
+  <div class="tags"><span class="tag">segmentation</span><span class="tag">unsupervised</span><span class="tag">2020</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2001.03006">Unsupervised feature recognition in single molecule break junction data</a></div>
+  <div class="authors">A. Magyarkuti, N. Balogh, Z. Balogh, L. Venkataraman, A. Halbritter</div>
+  <div class="venue">arXiv:2001.03006 (2020)</div>
+  <div class="abstract">
+    Unsupervised ML for recognizing features in break junction conductance traces.
+    Enables automated classification of junction configurations without labeled training
+    data. Complements the supervised and change-point approaches above.
+  </div>
+  <div class="tags"><span class="tag">feature recognition</span><span class="tag">unsupervised</span><span class="tag">2020</span></div>
+</div>
+
+<div class="gap-box">
+<h4>Gap for SME-Agent</h4>
+<p>
+All existing ML-on-BJ-data work focuses on <strong>analyzing experimental traces</strong>
+rather than <strong>using experimental data to guide molecular design</strong>.
+There is no published work that closes the loop from BJ measurements back to
+generative model improvement. This is precisely what SME-Agent's active learning
+loop aims to achieve.
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 3: ML for Molecular Adsorption & Surface Chemistry -->
+<!-- ============================================================ -->
+<div class="section" id="s3">
+<h2>3. ML for Molecular Adsorption &amp; Surface Chemistry</h2>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2601.18852">MAD-SURF: a machine learning interatomic potential for molecular adsorption on coinage metal surfaces</a></div>
+  <div class="authors">Manuel González Lastre, Joakim S. Jestilä, Rubén Pérez, Adam S. Foster</div>
+  <div class="venue">arXiv:2601.18852v2 (Jan 2026)</div>
+  <div class="relevance">★★★☆☆ — MLIP for molecule-metal interfaces relevant to junction geometry</div>
+  <div class="abstract">
+    ML interatomic potential (MAD-SURF) for predicting molecular adsorption on coinage
+    metal surfaces (Au, Ag, Cu). Central to surface chemistry and molecular electronics.
+    Relevant for modeling the Au–molecule–Au junction geometry that is critical for
+    accurate DFT+NEGF transport calculations. However, does not directly compute
+    transport properties — focuses on adsorption geometries and energetics.
+  </div>
+  <div class="tags"><span class="tag tag-yellow">MLIP</span><span class="tag tag-yellow">adsorption</span><span class="tag tag-yellow">Au surface</span><span class="tag">2026</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2504.03849">Paying attention to long-range electron correlation: a size-independent deep-learning approach to predicting molecules' electronic energies</a></div>
+  <div class="authors">Valerii Chuiko, Giovanni B. Da Rosa, Paul W. Ayers</div>
+  <div class="venue">arXiv:2504.03849 (2025)</div>
+  <div class="relevance">★★☆☆☆ — ML for electronic structure, but general (not SME-specific)</div>
+  <div class="abstract">
+    Deep learning approach for predicting molecular electronic energies using
+    one- and two-electron integrals. Size-independent, translationally/rotationally/
+    unitarily invariant descriptors. General quantum chemistry ML — not specific
+    to molecular junctions or transport.
+  </div>
+  <div class="tags"><span class="tag">electronic structure</span><span class="tag">deep learning</span><span class="tag">2025</span></div>
+</div>
+
+<div class="gap-box">
+<h4>Gap for SME-Agent</h4>
+<p>
+These MLIPs address the <strong>geometry prediction</strong> problem but not the
+<strong>transport prediction</strong> or <strong>molecular design</strong> problems.
+SME-Agent's Quantum-Transport Agent could potentially leverage MAD-SURF for more
+accurate junction geometry sampling before transport calculations.
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 4: General Quantum Transport + ML -->
+<!-- ============================================================ -->
+<div class="section" id="s4">
+<h2>4. General Quantum Transport + ML (Non-SME-Specific)</h2>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2207.12837">Classical and quantum machine learning applications in spintronics</a></div>
+  <div class="authors">Kumar Ghosh, Sumit Ghosh</div>
+  <div class="venue">arXiv:2207.12837 (2022)</div>
+  <div class="abstract">
+    ML algorithms predicting nonlinear conductance in two-terminal magnetic devices.
+    Demonstrates that ML can learn complex transport behavior, but focuses on magnetic
+    impurity systems rather than molecular junctions.
+  </div>
+  <div class="tags"><span class="tag">spintronics</span><span class="tag">conductance prediction</span><span class="tag">2022</span></div>
+</div>
+
+<div class="card">
+  <div class="title"><a href="https://arxiv.org/abs/2011.12018">Predicting the DNA Conductance using Deep Feed Forward Neural Network Model</a></div>
+  <div class="authors">Abhishek Aggarwal, Vinayak, Saientan Bag, Chiranjib Bhattacharyya, Umesh V. Waghmare, Prabal K Maiti</div>
+  <div class="venue">arXiv:2011.12018 (2020)</div>
+  <div class="abstract">
+    Deep feedforward NN predicting DNA conductance based on sequence and structure.
+    One of the few direct "ML predicts molecular conductance" papers, but specific to
+    DNA (not small-molecule junctions) and uses a relatively simple architecture.
+  </div>
+  <div class="tags"><span class="tag">DNA conductance</span><span class="tag">feedforward NN</span><span class="tag">2020</span></div>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 5: Closest Analogues: ML for ME (pre-2024) -->
+<!-- ============================================================ -->
+<div class="section" id="s5">
+<h2>5. Closest Analogues: ML for Molecular Electronics (pre-2024)</h2>
+
+<p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+For completeness, the most relevant pre-2024 works that apply ML/statistical methods
+to molecular electronics problems:
+</p>
+
+<div class="card">
+  <div class="title">MAD-SURF predecessor MLIPs for metal-organic interfaces</div>
+  <div class="authors">Various groups</div>
+  <div class="venue">~2020–2023</div>
+  <div class="abstract">
+    Multiple ML interatomic potentials developed for molecule-metal interfaces, particularly
+    Au-S and Au-N interfaces relevant to molecular junction anchor groups. These are
+    essential for accurate junction geometry modeling but do not directly address
+    transport property prediction or molecular design.
+  </div>
+  <div class="tags"><span class="tag">MLIP</span><span class="tag">interface</span></div>
+</div>
+
+<div class="card">
+  <div class="title">DFT+NEGF surrogate models for transmission spectra</div>
+  <div class="authors">Various groups (occasional scattered work)</div>
+  <div class="venue">~2018–2023</div>
+  <div class="abstract">
+    Scattered efforts to build ML surrogates for DFT+NEGF transmission calculations.
+    These are methodologically closest to what the SME-Agent predictor ensemble aims
+    to do, but none have been developed into a production system for molecular discovery.
+    Most remain proof-of-concept on very small datasets.
+  </div>
+  <div class="tags"><span class="tag tag-yellow">surrogate</span><span class="tag tag-yellow">transmission</span></div>
+</div>
+
+<div class="card">
+  <div class="title">SMEPre (legacy SMEGen project predictor)</div>
+  <div class="authors">Liu, Pan, Zhuang et al.</div>
+  <div class="venue">Unpublished manuscript, ~2023–2024</div>
+  <div class="abstract">
+    The SMEPre predictor from the legacy SMEGen project: random forest and neural network
+    models for DQI classification (AUC ~0.784), Seebeck regression, regulation range,
+    and efficiency. Trained on the 338-molecule mixed set. This is the most direct
+    predecessor to the SME-Agent predictor ensemble, though with significant limitations
+    (no uncertainty quantification, potential train/test leakage, moderate AUC).
+  </div>
+  <div class="tags"><span class="tag tag-yellow">SMEPre</span><span class="tag tag-yellow">legacy</span><span class="tag">unpublished</span></div>
+</div>
+
+<div class="gap-box">
+<h4>Critical observation</h4>
+<p>
+The fact that SMEPre remains <strong>unpublished</strong> (it exists only in the
+legacy manuscript draft) reinforces the point: there is essentially <strong>no
+peer-reviewed, published AI system for single-molecule electronics property
+prediction or molecular design</strong>. The field is wide open.
+</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Section 6: Gap Analysis & Positioning -->
+<!-- ============================================================ -->
+<div class="section" id="s6">
+<h2>6. Critical Gap Analysis &amp; SME-Agent Positioning</h2>
+
+<div class="summary-box">
+<h4>What exists (2024–2026)</h4>
+<ol style="margin-left:1.25rem;font-size:0.85rem;">
+  <li><strong>DeePTB-NEGF</strong> (Zou et al., 2024) — ML-accelerated DFT+NEGF simulation.
+    Accelerates transport <em>computation</em> but does not generate molecules, formulate
+    hypotheses, or guide discovery.</li>
+  <li><strong>Change-point detection for BJ data</strong> (Hamill et al., 2024) — automated
+    analysis of experimental conductance traces. Improves data processing but does not
+    close the design loop.</li>
+  <li><strong>Clustering for contact quality</strong> (Pellicer &amp; Sabater, 2025) —
+    experimental quality control for break junctions.</li>
+  <li><strong>MAD-SURF</strong> (Lastre et al., 2026) — MLIP for molecule-metal adsorption
+    geometries. Improves junction modeling but does not predict transport or design molecules.</li>
+</ol>
+</div>
+
+<div class="gap-box">
+<h4>What does NOT exist (gap analysis)</h4>
+<ol style="margin-left:1.25rem;font-size:0.85rem;">
+  <li><strong>No generative AI for SME molecules.</strong> No published work applies
+    graph diffusion, VAEs, Transformers, or any generative model to single-molecule
+    electronics molecular design. <strong>SME-Agent's Generative Design Agent fills this gap.</strong></li>
+  <li><strong>No ML predictor for quantum-transport properties.</strong> The only
+    existing predictor (SMEPre) is unpublished and lacks UQ. <strong>SME-Agent's
+    predictor ensemble with uncertainty quantification fills this gap.</strong></li>
+  <li><strong>No hypothesis-driven molecular discovery for SME.</strong> No system
+    formulates testable quantum-transport hypotheses and designs molecules to test
+    them. <strong>SME-Agent's Hypothesis Agent fills this gap.</strong></li>
+  <li><strong>No multi-agent system for SME.</strong> No existing framework combines
+    literature mining, generation, validation, synthesis assessment, and critique for
+    molecular electronics. <strong>SME-Agent's six-agent architecture fills this gap.</strong></li>
+  <li><strong>No active learning loop for SME.</strong> No published work closes the
+    DFT+NEGF → retrain → regenerate loop for molecular junction discovery.
+    <strong>SME-Agent's active learning workflow fills this gap.</strong></li>
+  <li><strong>No benchmark comparing AI vs expert rules vs random for SME.</strong>
+    No matched-budget comparison of molecular design strategies for quantum-transport
+    properties. <strong>SME-Agent's benchmark plan fills this gap.</strong></li>
+  <li><strong>No systematic experimental validation of AI-designed SME molecules with controls.</strong>
+    The legacy 3-molecule validation lacks negatives, expert controls, and isomer controls.
+    <strong>SME-Agent's 8-15 molecule validation plan fills this gap.</strong></li>
+</ol>
+</div>
+
+<div class="positioning-box">
+<h4>SME-Agent manuscript positioning statement</h4>
+<p>
+Based on this survey, the strongest claim SME-Agent can make (once validated) is:
+</p>
+<p style="font-size:0.9rem;font-style:italic;margin:0.5rem 0;">
+"We present the first AI-driven, multi-agent molecular discovery system for
+single-molecule electronics. The system integrates hypothesis generation,
+quantum-interference-conditioned molecular design, uncertainty-aware transport
+prediction, DFT+NEGF validation, retrosynthetic assessment, and prospective
+experimental testing — a combination that does not exist in any prior work."
+</p>
+</div>
+
+<h3>Comprehensive positioning table</h3>
+
+<table>
+  <tr>
+    <th>Capability</th>
+    <th>Expert rules (Lambert group)</th>
+    <th>DeePTB-NEGF (2024)</th>
+    <th>Generic drug-disc. AI</th>
+    <th>SMEPre (legacy)</th>
+    <th><strong>SME-Agent (target)</strong></th>
+  </tr>
+  <tr>
+    <td>QI-conditioned mol. generation</td>
+    <td>Manual (chemist designs)</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+  <tr>
+    <td>Transport property prediction</td>
+    <td>Heuristic (MRR)</td>
+    <td>Full DFT+NEGF</td>
+    <td>No</td>
+    <td>Partial (no UQ)</td>
+    <td><strong>Yes (with UQ)</strong></td>
+  </tr>
+  <tr>
+    <td>Hypothesis formulation</td>
+    <td>Human expert</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td><strong>Yes (LLM + scoring)</strong></td>
+  </tr>
+  <tr>
+    <td>Accelerated transport sim.</td>
+    <td>No</td>
+    <td><strong>Yes (100-1000×)</strong></td>
+    <td>No</td>
+    <td>No</td>
+    <td>Can integrate DeePTB</td>
+  </tr>
+  <tr>
+    <td>BJ data analysis</td>
+    <td>Manual</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td><strong>Yes (change point + clustering)</strong></td>
+  </tr>
+  <tr>
+    <td>Retrosynthesis filtering</td>
+    <td>Chemist judgment</td>
+    <td>No</td>
+    <td>Often (SAscore)</td>
+    <td>No</td>
+    <td><strong>Yes (SAscore, RAscore, AiZynth)</strong></td>
+  </tr>
+  <tr>
+    <td>Uncertainty quantification</td>
+    <td>N/A</td>
+    <td>No</td>
+    <td>Rare</td>
+    <td>No</td>
+    <td><strong>Yes (ensemble + calibration)</strong></td>
+  </tr>
+  <tr>
+    <td>Active learning loop</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Partial (for drugs)</td>
+    <td>No</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+  <tr>
+    <td>Prospective exp. validation</td>
+    <td><strong>Yes (many molecules)</strong></td>
+    <td>No</td>
+    <td>Rare</td>
+    <td>3 molecules only</td>
+    <td><strong>8-15 molecules with controls</strong></td>
+  </tr>
+  <tr>
+    <td>Critique / reviewer protection</td>
+    <td>N/A</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+</table>
+
+<h3>Key risks for the novelty claim</h3>
+
+<div class="gap-box" style="border-color:var(--warn);background:#2a2a1a;">
+<ol style="margin-left:1.25rem;font-size:0.85rem;">
+  <li><strong>The emptiness of the field is a double-edged sword:</strong> It means
+    SME-Agent is a first mover, but also that the approach is unvalidated in this domain.
+    Every component (graph diffusion for SME, QI-conditioned generation, hypothesis-driven
+    design) is unproven for SME molecules.</li>
+  <li><strong>Data scarcity is acute:</strong> ~171 Tier A molecules is an extremely
+    small dataset for training both generative and predictive models. Transfer learning
+    from larger chemical spaces will be essential but may not transfer well to the
+    specialized SME molecular subspace.</li>
+  <li><strong>DFT+NEGF cost vs depth:</strong> The DeePTB-NEGF work shows that ML-accelerated
+    transport is feasible, but integrating it requires substantial software engineering.
+    Without it, the DFT bottleneck (50-150 molecules/round) will limit the active learning
+    loop's statistical power.</li>
+  <li><strong>Comparison baseline challenge:</strong> Since no other AI system exists
+    for SME, the baseline comparison is against expert-designed molecules (from Lambert
+    group rules) and random enumeration. A strong result would beat expert rules — but
+    expert rules are themselves powerful and well-tested.</li>
+  <li><strong>Reviewer expectation management:</strong> Reviewers unfamiliar with
+    agentic AI may see the system as "just a pipeline" rather than a true agentic
+    discovery system. The manuscript must make the agentic contribution explicit.</li>
+</ol>
+</div>
+
+<div class="summary-box">
+<h4>Bottom line</h4>
+<p>
+<strong>SME-Agent is not entering a crowded field — it is creating one.</strong>
+The survey shows that between 2024 and 2026, there is exactly one paper
+(DeePTB-NEGF) that applies deep learning to molecular junction transport, and it
+addresses only the simulation acceleration problem. The remaining 2024+ AI-on-SME
+work is limited to data analysis (change point detection) and experimental quality
+control (clustering). <strong>No generative model, no predictor with UQ, no
+agentic system, no active learning loop, and no hypothesis-driven discovery exists
+for single-molecule electronics.</strong> If SME-Agent delivers on its architecture,
+it will be genuinely novel in both methods and domain.
+</p>
+</div>
+</div>
+
+<footer>
+  <p>SME-Agent Project &mdash; AI-on-SME Focused Literature Survey (2024–2026) &mdash; 2026-06-08</p>
+  <p>arXiv searches: "single-molecule machine learning", "molecular electronics deep learning", "break junction deep learning", "quantum transport machine learning molecular". Author searches: Colin Lambert, Wenjing Hong. Total unique AI-on-SME papers found: ~9 (2024–2026).</p>
+</footer>
+
+</div>
+</body>
+</html>
