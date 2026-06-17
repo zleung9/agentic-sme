@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Reproducibility Report — SMEGen Manuscript</title>
+<style>
+  :root {
+    --bg: #fafafa; --fg: #1a1a2e; --muted: #6b7280;
+    --card: #ffffff; --border: #e5e7eb;
+    --green: #059669; --green-bg: #ecfdf5; --green-border: #a7f3d0;
+    --amber: #d97706; --amber-bg: #fffbeb; --amber-border: #fde68a;
+    --red: #dc2626; --red-bg: #fef2f2; --red-border: #fecaca;
+    --blue: #2563eb; --blue-bg: #eff6ff; --blue-border: #bfdbfe;
+    --purple: #7c3aed; --purple-bg: #f5f3ff; --purple-border: #ddd6fe;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* Header */
+  header { border-bottom: 3px solid var(--blue); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+  header h1 { font-size: 1.75rem; font-weight: 700; color: var(--fg); }
+  header .subtitle { font-size: 1.1rem; color: var(--muted); margin-top: 0.25rem; }
+  header .meta { font-size: 0.85rem; color: var(--muted); margin-top: 0.75rem; }
+
+  /* Verdict banner */
+  .verdict { padding: 1.25rem 1.5rem; border-radius: 10px; margin-bottom: 2rem; font-size: 1.05rem; font-weight: 500; }
+  .verdict.red { background: var(--red-bg); border: 2px solid var(--red-border); color: var(--red); }
+  .verdict.amber { background: var(--amber-bg); border: 2px solid var(--amber-border); color: var(--amber); }
+
+  /* Score bar */
+  .score-bar { display: flex; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .score-card { flex: 1; min-width: 140px; padding: 1rem 1.25rem; border-radius: 10px; text-align: center; border: 1.5px solid var(--border); background: var(--card); }
+  .score-card .number { font-size: 2rem; font-weight: 700; }
+  .score-card .label { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+  .score-card.green .number { color: var(--green); }
+  .score-card.amber .number { color: var(--amber); }
+  .score-card.red .number { color: var(--red); }
+  .score-card.blue .number { color: var(--blue); }
+
+  /* Sections */
+  section { margin-bottom: 2.5rem; }
+  section h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--border); }
+  section h3 { font-size: 1.1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+  section p { margin-bottom: 0.75rem; color: var(--fg); }
+  section ul { margin-left: 1.25rem; margin-bottom: 0.75rem; }
+  section li { margin-bottom: 0.35rem; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.88rem; }
+  th, td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: #f3f4f6; font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); position: sticky; top: 0; }
+  tr:hover td { background: #f9fafb; }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 0.15rem 0.55rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+  .badge.green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .badge.amber { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+  .badge.red { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+  .badge.blue { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+  .badge.purple { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+
+  /* Callout boxes */
+  .callout { padding: 1rem 1.25rem; border-radius: 8px; margin: 1rem 0; font-size: 0.92rem; }
+  .callout.red { background: var(--red-bg); border-left: 4px solid var(--red); }
+  .callout.amber { background: var(--amber-bg); border-left: 4px solid var(--amber); }
+  .callout.green { background: var(--green-bg); border-left: 4px solid var(--green); }
+  .callout.blue { background: var(--blue-bg); border-left: 4px solid var(--blue); }
+  .callout strong { display: block; margin-bottom: 0.25rem; }
+
+  /* Placeholder tag */
+  .placeholder { font-family: monospace; font-size: 0.82rem; background: #fef3c7; color: #92400e; padding: 0.1rem 0.35rem; border-radius: 3px; }
+
+  /* Details/summary */
+  details { margin: 0.75rem 0; }
+  details summary { cursor: pointer; font-weight: 600; color: var(--blue); font-size: 0.92rem; }
+  details summary:hover { text-decoration: underline; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 3rem; font-size: 0.82rem; color: var(--muted); }
+
+  @media (max-width: 768px) {
+    .container { padding: 1rem; }
+    table { font-size: 0.78rem; }
+    th, td { padding: 0.4rem 0.4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Data Reproducibility Report</h1>
+  <div class="subtitle">Can we reproduce the SMEGen manuscript from the data on disk?</div>
+  <div class="meta">Manuscript: <em>Deep Learning-Driven Generative Molecular Design for Single-Molecule Electronics</em> (Manuscript-SMEGen_0324_LZ.docx) &nbsp;|&nbsp; Report date: 2026-06-17</div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- VERDICT -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="verdict red">
+  <strong>Verdict: Not reproducible with current on-disk data.</strong> Only 3 of 26 distinct data assets referenced in the manuscript are fully recoverable. The core 171-molecule SMEMol dataset cannot be isolated from the mixed 303-molecule CSV, one of four transport properties is entirely absent, the DFT+NEGF protocol is a placeholder, and no experimental raw data exists on disk.
+</div>
+
+<div class="score-bar">
+  <div class="score-card green">
+    <div class="number">3</div>
+    <div class="label">Fully on disk</div>
+  </div>
+  <div class="score-card amber">
+    <div class="number">8</div>
+    <div class="label">Partial / ambiguous</div>
+  </div>
+  <div class="score-card red">
+    <div class="number">15</div>
+    <div class="label">Missing entirely</div>
+  </div>
+  <div class="score-card blue">
+    <div class="number">37</div>
+    <div class="label">Placeholder gaps in MS</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 1. MANUSCRIPT DATA CLAIMS -->
+<!-- ═══════════════════════════════════════════ -->
+
+<section>
+<h2>1. Data Claimed in the Manuscript</h2>
+<p>The manuscript's scientific argument depends on several distinct data assets. Each plays a specific role in the narrative chain. Below we enumerate every dataset, statistic, figure, and table the manuscript references, along with the role it plays.</p>
+
+<h3>1.1 Core Datasets</h3>
+<table>
+  <thead>
+    <tr><th>Data Asset</th><th>Scale</th><th>Role in Manuscript</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>SMEMol (Tier A)</strong></td>
+      <td>171 molecules</td>
+      <td>Seed dataset for both LSTM generator and SMEPre predictor. Curated from &gt;100 publications with computed transmission properties (DQI, Seebeck, regulation space, regulation efficiency). The entire pipeline is bootstrapped from this set.</td>
+    </tr>
+    <tr>
+      <td><strong>338-molecule mixed set</strong></td>
+      <td>338 molecules</td>
+      <td>Benchmark for SMEPre vs 6 baseline models. 9:1 train/test split. <em>Caveat:</em> includes pipeline-generated molecules — not an independent evaluation.</td>
+    </tr>
+    <tr>
+      <td><strong>ChEMBL24</strong></td>
+      <td>~1.8M molecules</td>
+      <td>LSTM pretraining corpus. Learns general SMILES syntax. A "publicly released CLM checkpoint" is used.</td>
+    </tr>
+    <tr>
+      <td><strong>PCQM4Mv2</strong></td>
+      <td>3.37M molecules</td>
+      <td>SMEPre pretraining for HOMO-LUMO gap prediction (MAE 0.10 eV). Transfer learning source for fine-tuning on SMEMol.</td>
+    </tr>
+    <tr>
+      <td><strong>DPP molecules</strong></td>
+      <td>38 molecules</td>
+      <td>Domain-applicability test for SMEPre: correct relative HOMO-LUMO gap ordering despite absolute offsets.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>1.2 Generation Cycle Outputs</h3>
+<table>
+  <thead>
+    <tr><th>Cycle</th><th>Generated (total)</th><th>Valid / Unique / Anchored</th><th>Sent to DFT</th><th>DQI dips</th><th>Enhanced vs SMEMol</th><th>Role</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cycle 1</td>
+      <td><span class="placeholder">[missing]</span></td>
+      <td><span class="placeholder">[missing]</span></td>
+      <td>89</td>
+      <td>27 (30.3%)</td>
+      <td>4 (Gen_1–4 vs SME_1–4)</td>
+      <td>First-iteration evidence of DQI generation capability</td>
+    </tr>
+    <tr>
+      <td>Cycle 2</td>
+      <td><span class="placeholder">[missing]</span></td>
+      <td><span class="placeholder">[missing]</span></td>
+      <td>77</td>
+      <td>30 (39.0%)</td>
+      <td>9 (Gen_5–13 vs SME_5–13)</td>
+      <td>Improvement evidence (30.3% → 39.0% hit rate)</td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td>—</td>
+      <td>—</td>
+      <td>166</td>
+      <td>57</td>
+      <td>13</td>
+      <td>Quantity output claim; 6 novel scaffolds</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>1.3 Transport Properties (4 targets)</h3>
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Manuscript Metric</th><th>Role</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>DQI (destructive quantum interference)</td><td>Binary classification</td><td>AUC 0.784, ACC 0.765</td><td>Primary property of interest — does the molecule exhibit a transmission dip?</td></tr>
+    <tr><td>Seebeck coefficient</td><td>Regression (log-transformed)</td><td>RMSE 0.325</td><td>Thermoelectric response — key for energy-harvesting applications</td></tr>
+    <tr><td>Regulation space</td><td>Regression</td><td>RMSE 2.15</td><td>Gating range — how much conductance can be modulated by gate voltage</td></tr>
+    <tr><td>Regulation efficiency</td><td>Regression</td><td>RMSE 2.31</td><td>Gate sensitivity normalized by gate voltage — functional figure of merit</td></tr>
+  </tbody>
+</table>
+
+<h3>1.4 Experimental Validation Data</h3>
+<table>
+  <thead>
+    <tr><th>Molecule</th><th>On/off Ratio</th><th>Role</th><th>Raw Data Referenced</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Gen1</td><td>~50</td><td>Best AI-designed positive</td><td>1D conductance histogram, 2D conductance–gate histogram, cyclic voltammogram</td></tr>
+    <tr><td>Gen9</td><td>~25</td><td>Second AI positive</td><td>1D conductance histogram, 2D conductance–gate histogram, cyclic voltammogram</td></tr>
+    <tr><td>SME1</td><td>Flat / minimal</td><td>SMEMol analog control (expected negative)</td><td>1D conductance histogram, 2D conductance–gate histogram, cyclic voltammogram</td></tr>
+  </tbody>
+</table>
+<p>All three conductance values at 0 V are <span class="placeholder">[fill in value] G0</span> — missing in the manuscript. Synthesis routes, NMR, mass spec: <span class="placeholder">[Provide synthesis routes…]</span>. Tip preparation, trace counts, statistical methods: <span class="placeholder">[Add any additional experimental details…]</span>.</p>
+
+<h3>1.5 Supplementary Materials Referenced</h3>
+<table>
+  <thead>
+    <tr><th>Item</th><th>Content</th><th>Status in MS</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Supp Table S1</td><td>Complete SMEMol molecule list with all 4 properties</td><td>Referenced but content not in repo</td></tr>
+    <tr><td>Supp Table S2</td><td>Virtual screening funnel statistics</td><td>Referenced; numbers are <span class="placeholder">[Report the filtering statistics…]</span></td></tr>
+    <tr><td>Supp Fig S4</td><td>4 enhanced molecules from Cycle 1 (Gen_1–4 vs SME_1–4)</td><td>Referenced; structures only in DOCX</td></tr>
+    <tr><td>Supp Fig S5</td><td>9 enhanced molecules from Cycle 2 (Gen_5–13 vs SME_5–13)</td><td>Referenced; structures only in DOCX</td></tr>
+    <tr><td>Supp Fig S6</td><td>Complete scaffold frequency distribution</td><td>Referenced; not in repo</td></tr>
+    <tr><td>Supp Fig S7</td><td>Cyclic voltammograms of Gen1, Gen9, SME1</td><td>Referenced; raw electrochemistry data not in repo</td></tr>
+  </tbody>
+</table>
+
+<h3>1.6 DFT+NEGF Protocol</h3>
+<div class="callout red">
+  <strong>Critical gap.</strong> The entire DFT/NEGF Methods section is a single placeholder paragraph: <span class="placeholder">[Provide the full computational protocol: exchange-correlation functional, basis set, pseudopotential type, electrode model…]</span>. The manuscript states TranSIESTA was used and that a "uniform DFT+NEGF framework" computed all 4 properties for all 171 molecules, but none of the protocol details (functional, basis set, pseudopotential, Au geometry, k-points, convergence, conformer sampling, Fermi alignment, transmission-dip definition, gate mapping) are specified.
+</div>
+
+<h3>1.7 Model Artifacts</h3>
+<table>
+  <thead>
+    <tr><th>Artifact</th><th>Details</th><th>Role</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>LSTM/CLM pretrained checkpoint</td><td>"Publicly released" ChEMBL24 checkpoint</td><td>Starting point for SMILES fine-tuning on SMEMol</td></tr>
+    <tr><td>SMEPre pretrained checkpoint</td><td>GroupViT (12 layers, 32 heads, 2-stage grouping), pretrained on PCQM4Mv2</td><td>Transfer-learned to SMEMol; produces all 4 predictions</td></tr>
+    <tr><td>SMEPre fine-tuned checkpoint</td><td>50× SMILES augmentation; scaffold split 9:1</td><td>Final predictor; screening filter for generation cycles</td></tr>
+    <tr><td>50-fold SMILES augmentation</td><td>Applied during training; not stored</td><td>Data augmentation strategy</td></tr>
+  </tbody>
+</table>
+
+<h3>1.8 Placeholder Count in Manuscript</h3>
+<p>The manuscript contains <strong>37 distinct placeholders</strong> where data, text, or citations are missing. Key categories:</p>
+<ul>
+  <li><strong>Missing data values:</strong> 3 conductance values, filtering funnel statistics, property statistics, total generated SMILES per cycle</li>
+  <li><strong>Missing protocol sections:</strong> Entire DFT+NEGF Methods paragraph, synthesis methods, experimental details</li>
+  <li><strong>Missing citations:</strong> 4 definition citations (DQI, Seebeck, regulation space, regulation efficiency) + 1 EC-STMBJ correspondence citation + 13 incomplete references</li>
+  <li><strong>Missing analysis:</strong> R²/Pearson for regressions, mean improvement across 13 molecules, DFT vs experiment comparison figure, scaffold split clarification</li>
+  <li><strong>Missing URLs:</strong> Data availability URL, code availability URL</li>
+</ul>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 2. ON-DISK INVENTORY -->
+<!-- ═══════════════════════════════════════════ -->
+
+<section>
+<h2>2. Data Currently on Disk</h2>
+
+<h3>2.1 Core SME Training Data (<code>data/raw_legacy/transformer_m/</code>)</h3>
+<table>
+  <thead>
+    <tr><th>File</th><th>Rows</th><th>Unique SMILES</th><th>Columns</th><th>Target Range</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>my_reg.csv</code></td><td>303</td><td>302</td><td>smiles, class</td><td>0.40 – 13.40 (mean 4.88)</td><td>Likely regulation space; Tier A+B mixed</td></tr>
+    <tr><td><code>ss_reg.csv</code></td><td>303</td><td>302</td><td>smiles, class</td><td>0.97 – 2.99 (mean 1.79)</td><td>Likely log-Seebeck; same 303 mol</td></tr>
+    <tr><td><code>h_reg.csv</code></td><td>303</td><td>302</td><td>smiles, class</td><td>0.40 – 13.40 (mean 4.88)</td><td>Byte-identical to my_reg.csv — duplicate</td></tr>
+    <tr><td><code>qi_classification.csv</code></td><td>7,110</td><td>227</td><td>smiles, qi</td><td>Binary: 54.9% positive</td><td>32× duplication (conformers); different population from 338-mol set</td></tr>
+    <tr><td><code>retrieval_qi.csv</code></td><td>5,212</td><td>5,175</td><td>smiles, label</td><td>Binary: 45.1% positive</td><td>6 invalid SMILES (Si valence)</td></tr>
+    <tr><td><code>qi_old.csv</code></td><td>237</td><td>227</td><td>smiles, qi</td><td>Binary</td><td>Subset of qi_classification</td></tr>
+    <tr><td><code>ss_seebeck.csv</code></td><td>1,761</td><td>46</td><td>smiles, class</td><td>3.93 – 262.12 µV/K</td><td>Absolute Seebeck; 38× duplication</td></tr>
+    <tr><td><code>ss_seebeck_pn.csv</code></td><td>1,761</td><td>46</td><td>smiles, class</td><td>Signed (p/n type)</td><td>Same 1,761 rows as ss_seebeck</td></tr>
+    <tr><td><code>ss_seebeck_old.csv</td><td>46</td><td>46</td><td>smiles, class</td><td>−262 to +162 µV/K</td><td>Original experimental Seebeck (no duplication)</td></tr>
+    <tr><td><code>mydata_1.csv</code></td><td>1,962</td><td>49</td><td>smiles, class</td><td>Negative values</td><td>Target meaning unclear; 40× duplication</td></tr>
+    <tr><td><code>s_subset.csv</code></td><td>1,966</td><td>53</td><td>smiles, class</td><td>~1.04 (small positive)</td><td>Target meaning unclear; 37× duplication</td></tr>
+    <tr><td><code>ss_subset.csv</code></td><td>2,768</td><td>67</td><td>smiles, class</td><td>Negative values</td><td>Target meaning unclear; 41× duplication</td></tr>
+    <tr><td><code>dpp.csv</code></td><td>38</td><td>22</td><td>idx, smiles, homolumogap</td><td>0 – 37 (integers)</td><td>HOMO-LUMO gap values are sequential indices, not physical gaps</td></tr>
+  </tbody>
+</table>
+
+<h3>2.2 HOMO-LUMO Gap Enumeration Data (<code>data/raw_legacy/</code>)</h3>
+<table>
+  <thead>
+    <tr><th>File</th><th>Rows</th><th>Unique SMILES</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>data500.csv</code></td><td>501</td><td>501</td><td>Gap ~3–5 eV; uses <code>idx</code> column</td></tr>
+    <tr><td><code>data500_1000.csv</code></td><td>500</td><td>500</td><td>Gap ~3.5–5.4 eV; inconsistent <code>Unnamed: 0</code></td></tr>
+    <tr><td><code>data1000_1500.csv</code></td><td>500</td><td>500</td><td>Same column inconsistency</td></tr>
+    <tr><td><code>data1500_2000.csv</code></td><td>500</td><td>500</td><td>Same column inconsistency</td></tr>
+    <tr><td><code>data2000_5000.csv</code></td><td>3,000</td><td>2,999</td><td>1 duplicate SMILES</td></tr>
+  </tbody>
+</table>
+<p>Total: 5,001 rows, 4,999 unique SMILES. <strong>Zero overlap</strong> with the SME core datasets. These are generic molecules for HOMO-LUMO gap pretraining, not SME-specific.</p>
+
+<h3>2.3 Prediction Logs (<code>logs_reg_v1_seed2/</code>)</h3>
+<table>
+  <thead>
+    <tr><th>File</th><th>Rows</th><th>Columns</th><th>Split</th><th>Best MAE</th><th>Best RMSE</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>checkpoint_best_valid_predictions.csv</code></td><td>46</td><td>idx, y_true, y_pred</td><td>Random 213/46/46</td><td>2.417</td><td>3.022</td></tr>
+    <tr><td><code>checkpoint_best_test_predictions.csv</code></td><td>46</td><td>idx, y_true, y_pred</td><td>Random 213/46/46</td><td>2.688</td><td>3.050</td></tr>
+  </tbody>
+</table>
+
+<h3>2.4 Processed Data (<code>data/processed/</code>)</h3>
+<table>
+  <thead>
+    <tr><th>File</th><th>Rows</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>smemol_extracted.csv</code></td><td>26</td><td>29 columns matching MoleculeRecord schema; ALL SMILES columns are NaN — only IDs/tiers/notes populated</td></tr>
+    <tr><td><code>smemol_standardized.csv</code></td><td>0</td><td>Header only — ingest script has not been run successfully</td></tr>
+  </tbody>
+</table>
+
+<h3>2.5 Other Files</h3>
+<ul>
+  <li><code>data/audit_trails/dataset_audit.json</code> — Audit of the 26-row extracted file (quality score 55/100)</li>
+  <li><code>data/raw_legacy/data_read_key.txt</code> — Index mapping: rows 0–14 = DPP, 15–37 = CPP series</li>
+  <li><code>configs/dataset.yaml</code> — Tier definitions (A: 171, B: 166, C: 3), split rules, anchor groups</li>
+</ul>
+
+<h3>2.6 What Does NOT Exist on Disk</h3>
+<ul>
+  <li><strong>Model checkpoints:</strong> No <code>.pt</code>, <code>.pth</code>, <code>.pkl</code>, <code>.ckpt</code>, <code>.safetensors</code> files</li>
+  <li><strong>Notebooks:</strong> All <code>notebooks/</code> subdirectories are empty</li>
+  <li><strong>Splits:</strong> No train/val/test split files in <code>data/splits/</code></li>
+  <li><strong>DFT results:</strong> <code>data/dft_results/</code> is empty</li>
+  <li><strong>Experimental data:</strong> <code>data/experiment/</code> is empty</li>
+  <li><strong>Generated molecules:</strong> <code>data/generated/</code> is empty</li>
+  <li><strong>Literature sources:</strong> <code>data/raw_literature/</code> is empty</li>
+</ul>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 3. CROSS-REFERENCE TABLE -->
+<!-- ═══════════════════════════════════════════ -->
+
+<section>
+<h2>3. Cross-Reference: Manuscript Claims vs. On-Disk Reality</h2>
+
+<table>
+  <thead>
+    <tr><th style="width:22%">Manuscript Data</th><th style="width:8%">Status</th><th style="width:25%">On-Disk Location</th><th style="width:45%">Gap Description</th></tr>
+  </thead>
+  <tbody>
+    <!-- Fully on disk -->
+    <tr>
+      <td>DPP molecules (38, HOMO-LUMO gap validation)</td>
+      <td><span class="badge green">Found</span></td>
+      <td><code>dpp.csv</code></td>
+      <td>22 unique SMILES (38 rows with conformers). HOMO-LUMO gap values appear to be indices, not physical values — needs verification.</td>
+    </tr>
+    <tr>
+      <td>SMEPre prediction logs (valid + test)</td>
+      <td><span class="badge green">Found</span></td>
+      <td><code>logs_reg_v1_seed2/</code></td>
+      <td>92 predictions total. Only for one regression target; no DQI or other property predictions.</td>
+    </tr>
+    <tr>
+      <td>Original experimental Seebeck (46 molecules)</td>
+      <td><span class="badge green">Found</span></td>
+      <td><code>ss_seebeck_old.csv</code></td>
+      <td>46 unique SMILES, signed values (−262 to +162 µV/K). Matches manuscript's Seebeck experimental reference.</td>
+    </tr>
+
+    <!-- Partially on disk -->
+    <tr>
+      <td>SMEMol 171 literature molecules (Tier A)</td>
+      <td><span class="badge amber">Partial</span></td>
+      <td><code>my_reg.csv</code> + <code>ss_reg.csv</code> (303 mol each)</td>
+      <td>The 171 are <strong>mixed with</strong> 132 generated molecules in a single CSV with no provenance column. Cannot isolate Tier A from Tier B. No molecule IDs or names.</td>
+    </tr>
+    <tr>
+      <td>338-molecule mixed benchmark set</td>
+      <td><span class="badge amber">Partial</span></td>
+      <td><code>my_reg.csv</code> (303 mol)</td>
+      <td>Only 303 rows, not 338. ~35 molecules are unaccounted for. No split assignment column; the 9:1 split is not recoverable.</td>
+    </tr>
+    <tr>
+      <td>DQI labels for the 338-molecule set</td>
+      <td><span class="badge amber">Partial</span></td>
+      <td><code>qi_classification.csv</code> (7,110 mol, 227 unique)</td>
+      <td>Wrong population. This large QI set has only 227 unique SMILES (with conformer duplication). The DQI labels for the specific 338-molecule benchmark are not available as a standalone file.</td>
+    </tr>
+    <tr>
+      <td>Seebeck coefficient (log-transformed)</td>
+      <td><span class="badge amber">Partial</span></td>
+      <td><code>ss_reg.csv</code></td>
+      <td>303 values in range [0.97, 2.99] consistent with log-Seebeck. But column is named "class" — not explicitly labeled. No mapping to molecule names.</td>
+    </tr>
+    <tr>
+      <td>Regulation space</td>
+      <td><span class="badge amber">Partial</span></td>
+      <td><code>my_reg.csv</code></td>
+      <td>303 values in range [0.40, 13.40] — likely regulation space. But "class" column name is ambiguous; could be regulation efficiency or another property.</td>
+    </tr>
+    <tr>
+      <td>13 enhanced molecules (Gen_1–13, SME_1–13)</td>
+      <td><span class="badge amber">Partial</span></td>
+      <td>Names in <code>extract.py</code> KNOWN_MOLECULES</td>
+      <td>Only names exist (e.g., "Gen_1", "SME_1"). No SMILES, no structures, no properties on disk.</td>
+    </tr>
+    <tr>
+      <td>6 novel scaffolds (Figure 6b)</td>
+      <td><span class="badge amber">Partial</span></td>
+      <td>Only in manuscript DOCX figure</td>
+      <td>Structures are embedded as images in the DOCX. Not extractable as SMILES without manual re-drawing or OCR.</td>
+    </tr>
+    <tr>
+      <td>SMEPre benchmark metrics</td>
+      <td><span class="badge amber">Partial</span></td>
+      <td>Manuscript text only</td>
+      <td>RMSE/AUC/ACC numbers are in the manuscript, but raw predictions for DQI, Seebeck, and regulation efficiency are not saved. Only one regression target's predictions exist in logs.</td>
+    </tr>
+
+    <!-- Missing entirely -->
+    <tr>
+      <td>Regulation efficiency</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>One of the four core transport properties. No CSV file on disk contains values matching the manuscript's RMSE of 2.31. <strong>Cannot train or evaluate this target.</strong></td>
+    </tr>
+    <tr>
+      <td>Generation Cycle 1 details (total generated, filtering funnel, 89 DFT results)</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>No file records which molecules were generated, filtered, or submitted to DFT. The funnel statistics are placeholders in the manuscript.</td>
+    </tr>
+    <tr>
+      <td>Generation Cycle 2 details (total generated, filtering funnel, 77 DFT results)</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>Same as Cycle 1. No filtering funnel, no DFT results per molecule, no SMILES for the 77 candidates.</td>
+    </tr>
+    <tr>
+      <td>3 experimental molecules (Gen1, Gen9, SME1) — SMILES + EC-STMBJ data</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>No SMILES, no conductance values (manuscript: <span class="placeholder">[fill in value] G0</span>), no histograms, no transfer curves, no CVs on disk. Only in embedded DOCX figures.</td>
+    </tr>
+    <tr>
+      <td>Supp Table S1 (full molecule list + all 4 properties)</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>The definitive molecule inventory. Not available as structured data.</td>
+    </tr>
+    <tr>
+      <td>Supp Table S2 (filtering funnel statistics)</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>Not available. Manuscript itself has placeholders for these numbers.</td>
+    </tr>
+    <tr>
+      <td>DFT+NEGF protocol</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>Entire Methods section is a placeholder. No functional, basis set, pseudopotential, electrode model, convergence criteria, Fermi alignment, or gate mapping.</td>
+    </tr>
+    <tr>
+      <td>LSTM/CLM pretrained checkpoint</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>Referenced as "publicly released CLM checkpoint" but not found in repo or linked.</td>
+    </tr>
+    <tr>
+      <td>SMEPre pretrained + fine-tuned checkpoints</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>No model weights anywhere in the repository.</td>
+    </tr>
+    <tr>
+      <td>50-fold SMILES augmentation data</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>Applied during training but not stored. Augmentation logic is not in the repo.</td>
+    </tr>
+    <tr>
+      <td>Train/test split assignments</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td><code>schema.py</code> defines <code>split_assignment</code> but no file populates it. The legacy split was random 213/46/46, not scaffold-based.</td>
+    </tr>
+    <tr>
+      <td>Anchor group type labels</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>Manuscript: <span class="placeholder">[specify anchor group types…]</span>. No CSV has anchor columns. <code>schema.py</code> defines 12 anchor types but they are unpopulated.</td>
+    </tr>
+    <tr>
+      <td>Cyclic voltammograms (raw electrochemistry)</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>Only in Supp Fig S7 (embedded DOCX image). No numerical data.</td>
+    </tr>
+    <tr>
+      <td>ChEMBL24 preprocessed corpus</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>External database. Can be re-downloaded but no preprocessing script or filtered subset is in the repo.</td>
+    </tr>
+    <tr>
+      <td>PCQM4Mv2 preprocessed subset</td>
+      <td><span class="badge red">Missing</span></td>
+      <td>—</td>
+      <td>External OGB dataset. Can be re-downloaded but no fine-tuning data split or preprocessing pipeline is in the repo.</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 4. STRUCTURAL ISSUES -->
+<!-- ═══════════════════════════════════════════ -->
+
+<section>
+<h2>4. Structural Reproducibility Issues</h2>
+<p>Beyond missing files, the manuscript has deeper structural problems that undermine reproducibility.</p>
+
+<h3>4.1 Train/Test Leakage</h3>
+<div class="callout red">
+  <strong>The 338-molecule benchmark set is circular.</strong>
+  SMEPre is trained on SMEMol → used to screen generated candidates → validated candidates are added back → SMEPre is retrained and benchmarked on a split of the expanded set. A 9:1 random split on this mixed data evaluates performance on molecules that were selected by an earlier version of the same model. This inflates metrics and is not an independent evaluation.
+</div>
+
+<h3>4.2 Missing Provenance</h3>
+<div class="callout amber">
+  <strong>Legacy CSVs have zero provenance metadata.</strong>
+  The <code>my_reg.csv</code> and <code>ss_reg.csv</code> files contain only <code>smiles</code> + <code>class</code>. There is no column for: source type (literature vs generated), anchor group, scaffold ID, data tier, generation round, DFT protocol, or split assignment. The 303 molecules cannot be traced to their origin.
+</div>
+
+<h3>4.3 Inconsistent Naming</h3>
+<div class="callout amber">
+  <strong>Naming conventions are fragmented.</strong>
+  Column names vary across files (<code>qi</code> vs <code>label</code>, <code>idx</code> vs <code>Unnamed: 0</code>). Molecule names are inconsistent (SME1 vs Mol7 — the manuscript itself flags this with a placeholder). No canonical molecule ID links the CSV rows to the named Gen/SME molecules.
+</div>
+
+<h3>4.4 Data Duplication Without Documentation</h3>
+<div class="callout amber">
+  <strong>Massive undocumented duplication in large datasets.</strong>
+  <code>qi_classification.csv</code> has 7,110 rows but only 227 unique SMILES (32× duplication). <code>ss_seebeck.csv</code> has 1,761 rows but only 46 unique SMILES (38× duplication). These are likely conformer or augmentation duplicates, but this is never documented, making it impossible to know what constitutes an independent sample.
+</div>
+
+<h3>4.5 Incomplete Manuscript (37 Placeholders)</h3>
+<div class="callout amber">
+  <strong>The manuscript is a draft with 37 unfilled placeholders.</strong>
+  These include the entire DFT/NEGF protocol, all three conductance values, synthesis routes, filtering statistics, property statistics, 5 missing citations, and 13 incomplete references. The manuscript cannot be submitted in this state.
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 5. ACTION PLAN -->
+<!-- ═══════════════════════════════════════════ -->
+
+<section>
+<h2>5. What To Do: Recovery Action Plan</h2>
+<p>Below we prioritize actions to recover the data needed for reproduction, grouped by urgency.</p>
+
+<h3>Priority 1 — Recover the Core Dataset (Critical, blocking everything)</h3>
+<table>
+  <thead>
+    <tr><th>Action</th><th>How</th><th>Recovers</th><th>Estimated Effort</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Extract Supp Table S1 from the DOCX</strong></td>
+      <td>Parse the manuscript's supplementary tables (embedded in DOCX or separate Supp file) using python-docx. Extract molecule IDs, SMILES, and all 4 property values.</td>
+      <td>Complete SMEMol molecule list, all 4 transport properties, molecule names → SMILES mapping</td>
+      <td>1–2 days</td>
+    </tr>
+    <tr>
+      <td><strong>Separate Tier A (171) from Tier B (167)</strong></td>
+      <td>Cross-reference the extracted Supp Table S1 against <code>my_reg.csv</code> (303 mol) by SMILES matching. Tag each row with <code>source_type</code> and <code>data_tier</code>.</td>
+      <td>Clean Tier A and Tier B separation; provenance for every molecule</td>
+      <td>0.5 day</td>
+    </tr>
+    <tr>
+      <td><strong>Identify the 4th property (regulation efficiency)</strong></td>
+      <td>Once Supp Table S1 is extracted, verify which column maps to regulation efficiency. If not in any CSV, it must be re-extracted from the original DFT results or re-computed.</td>
+      <td>Regulation efficiency — one of 4 core targets</td>
+      <td>0.5–2 days (depends on whether values exist in DOCX)</td>
+    </tr>
+    <tr>
+      <td><strong>Map Gen/SME names to SMILES</strong></td>
+      <td>Match the 13 enhanced molecule names (Gen_1–13, SME_1–13) from <code>extract.py</code> to SMILES via Supp Table S1 or Figures S4/S5 in the DOCX.</td>
+      <td>SMILES for all 13 enhanced molecules + 3 experimental molecules</td>
+      <td>0.5 day</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Priority 2 — Recover Generation Cycle Data</h3>
+<table>
+  <thead>
+    <tr><th>Action</th><th>How</th><th>Recovers</th><th>Estimated Effort</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Find original generation cycle outputs</strong></td>
+      <td>Search the external SSD or old SMEGen repo for: (a) total SMILES generated per cycle, (b) filtering funnel at each step, (c) DFT+NEGF results per molecule, (d) SMEPre scores used for screening.</td>
+      <td>Full reproducibility of both generation cycles</td>
+      <td>1–3 days (depends on source availability)</td>
+    </tr>
+    <tr>
+      <td><strong>Reconstruct filtering funnel statistics</strong></td>
+      <td>If raw generation outputs are found, re-run the filtering pipeline (validity → uniqueness → anchor filter → SMEPre prediction → DFT submission). Otherwise, fill Supp Table S2 from the old SMEGen logs.</td>
+      <td>Supp Table S2; replaces manuscript placeholders</td>
+      <td>1–2 days</td>
+    </tr>
+    <tr>
+      <td><strong>Find DFT+NEGF results for all 166 validated molecules</strong></td>
+      <td>Search for TranSIESTA output files or result summaries. Each molecule should have: transmission spectrum, DQI label, Seebeck, regulation space, regulation efficiency.</td>
+      <td>Per-molecule DFT results; enables re-evaluation with standardized protocol</td>
+      <td>1–3 days</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Priority 3 — Recover Experimental Data</h3>
+<table>
+  <thead>
+    <tr><th>Action</th><th>How</th><th>Recovers</th><th>Estimated Effort</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Extract EC-STMBJ raw data</strong></td>
+      <td>Retrieve original conductance histograms, 2D conductance–gate maps, and transfer curves from the experimental lab's data storage. Convert to structured numerical format (CSV/HDF5).</td>
+      <td>Machine-readable experimental data for Gen1, Gen9, SME1</td>
+      <td>2–5 days (requires lab access)</td>
+    </tr>
+    <tr>
+      <td><strong>Fill conductance values</strong></td>
+      <td>Read the numerical conductance at 0 V from the raw histograms. Replace the 3 <span class="placeholder">[fill in value] G0</span> placeholders.</td>
+      <td>Quantitative experimental results</td>
+      <td>&lt;0.5 day (once raw data is available)</td>
+    </tr>
+    <tr>
+      <td><strong>Recover cyclic voltammograms</strong></td>
+      <td>Get the raw CV data (voltage vs current) from the potentiostat files. Currently only exists as Supp Fig S7.</td>
+      <td>Numerical CV data; replaces figure-only evidence</td>
+      <td>1–2 days (requires lab access)</td>
+    </tr>
+    <tr>
+      <td><strong>Document synthesis routes</strong></td>
+      <td>Obtain synthesis procedures, NMR spectra, and mass spec data for Gen1, Gen9, SME1. Replace <span class="placeholder">[Provide synthesis routes…]</span>.</td>
+      <td>Complete experimental methods section</td>
+      <td>3–7 days (requires lab collaboration)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Priority 4 — Fill Manuscript Gaps</h3>
+<table>
+  <thead>
+    <tr><th>Action</th><th>How</th><th>Recovers</th><th>Estimated Effort</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Write the DFT+NEGF protocol</strong></td>
+      <td>Document the exact TranSIESTA settings used: functional, basis set, pseudopotential, Au(111) slab model, k-points, convergence thresholds, Au–S bond length, Fermi alignment method, transmission-dip definition, gate-voltage mapping, conformer sampling. Fill <span class="placeholder">[Provide the full computational protocol…]</span>.</td>
+      <td>Reproducible computational methods</td>
+      <td>2–4 days (requires DFT practitioner)</td>
+    </tr>
+    <tr>
+      <td><strong>Re-run benchmarks with scaffold splits</strong></td>
+      <td>Replace the random 9:1 split with scaffold splits. Re-train and re-evaluate SMEPre and all 6 baselines. Report RMSE, AUC, R², confidence intervals.</td>
+      <td>Leakage-safe evaluation; stronger manuscript claim</td>
+      <td>3–5 days</td>
+    </tr>
+    <tr>
+      <td><strong>Fill all 37 placeholders</strong></td>
+      <td>Work through the manuscript systematically. Fill missing values, citations, analysis, and URLs.</td>
+      <td>Complete, submittable manuscript</td>
+      <td>5–10 days</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Priority 5 — Rebuild for SME-Agent (Forward-Looking)</h3>
+<table>
+  <thead>
+    <tr><th>Action</th><th>How</th><th>Recovers</th><th>Estimated Effort</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Re-download external datasets</strong></td>
+      <td>ChEMBL24 (for LSTM baseline) and PCQM4Mv2 (for SMEPre pretraining) from their official sources. Write preprocessing scripts.</td>
+      <td>Reproducible pretraining pipelines</td>
+      <td>2–3 days</td>
+    </tr>
+    <tr>
+      <td><strong>Create scaffold-split files</strong></td>
+      <td>Once Tier A is isolated, generate scaffold-based train/val/test splits and save to <code>data/splits/</code>. Implement in <code>scripts/audit_dataset.py</code>.</td>
+      <td>Leakage-safe splits for all future work</td>
+      <td>1 day</td>
+    </tr>
+    <tr>
+      <td><strong>Run <code>ingest_legacy_data.py</code></td>
+      <td>The script exists but has not been successfully run. Debug and execute to populate <code>smemol_standardized.csv</code> with canonical SMILES, SELFIES, InChI, anchors, scaffolds, and tiers.</td>
+      <td>First standardized dataset with full MoleculeRecord schema</td>
+      <td>1–2 days</td>
+    </tr>
+    <tr>
+      <td><strong>Annotate anchor groups for all molecules</strong></td>
+      <td>Use the 12 anchor types in <code>schema.py</code> to classify every molecule. Fill the <span class="placeholder">[specify anchor group types…]</span> gap.</td>
+      <td>Anchor labels; required for generator conditioning</td>
+      <td>1–2 days</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 6. SUMMARY SCORECARD -->
+<!-- ═══════════════════════════════════════════ -->
+
+<section>
+<h2>6. Reproducibility Scorecard</h2>
+
+<table>
+  <thead>
+    <tr><th>Dimension</th><th>Score</th><th>Detail</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dataset availability</td>
+      <td><span class="badge red">2/10</span></td>
+      <td>Core 171-molecule set is mixed with generated data and cannot be isolated. One of 4 properties is missing. Supp Table S1 is not available as structured data.</td>
+    </tr>
+    <tr>
+      <td>Provenance tracking</td>
+      <td><span class="badge red">1/10</span></td>
+      <td>Zero provenance in any raw CSV. No source type, tier, generation round, or DFT protocol metadata.</td>
+    </tr>
+    <tr>
+      <td>Computational protocol</td>
+      <td><span class="badge red">0/10</span></td>
+      <td>Entire DFT+NEGF Methods section is a placeholder. Not reproducible.</td>
+    </tr>
+    <tr>
+      <td>Model availability</td>
+      <td><span class="badge red">0/10</span></td>
+      <td>No checkpoints, no training scripts, no augmentation logic. Only 92 prediction values survive.</td>
+    </tr>
+    <tr>
+      <td>Experimental data</td>
+      <td><span class="badge red">0/10</span></td>
+      <td>No raw EC-STMBJ data, no CV data, no synthesis routes. Only embedded DOCX figures.</td>
+    </tr>
+    <tr>
+      <td>Split integrity</td>
+      <td><span class="badge red">1/10</span></td>
+      <td>Random split on a circular dataset. No scaffold split, no prospective split, no locked test set.</td>
+    </tr>
+    <tr>
+      <td>Manuscript completeness</td>
+      <td><span class="badge amber">3/10</span></td>
+      <td>37 placeholders including 3 key data values, entire protocol sections, and 18 missing citations/references.</td>
+    </tr>
+    <tr style="font-weight:700; background:#f9fafb;">
+      <td>Overall reproducibility</td>
+      <td><span class="badge red">1/10</span></td>
+      <td>The manuscript's results cannot be independently reproduced from the data and code currently available.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout blue">
+  <strong>Path forward.</strong>
+  The single highest-leverage action is <strong>extracting Supp Table S1 from the manuscript DOCX</strong>. This would recover: (a) the complete 338-molecule list with SMILES, (b) all 4 transport properties, (c) the Gen/SME name → SMILES mapping, and (d) enough information to separate Tier A from Tier B. Everything else — scaffold splits, anchor annotation, benchmark re-runs — depends on having this canonical molecule list first.
+</div>
+</section>
+
+<footer>
+  Generated 2026-06-17 &nbsp;|&nbsp; Source: <code>Manuscript-SMEGen_0324_LZ.docx</code> + <code>data/raw_legacy/</code> &nbsp;|&nbsp; Repository: agentic-sme
+</footer>
+
+</div>
+</body>
+</html>
